@@ -1,4 +1,7 @@
 import { Grid, GridItem, Show } from "@chakra-ui/react";
+import NavBar from "./components/NavBar";
+import ToolsPanel from "./components/ToolsPanel";
+import "./App.css";
 
 function App() {
   return (
@@ -11,20 +14,22 @@ function App() {
         base: "200px 1fr",
         lg: "250px 1fr 250px",
       }}
+      templateRows={{ base: "50px 1fr", lg: "50px 1fr" }}
+      className="grid-style"
     >
-      <GridItem area="nav" bgColor={"red"}>
-        Nav
+      <GridItem area="nav">
+        <NavBar />
       </GridItem>
 
       <GridItem area="tools" bgColor={"black"}>
-        Components
+        <ToolsPanel />
       </GridItem>
 
       <GridItem area="main" bgColor={"orange"}>
         Main
       </GridItem>
       <Show above="lg">
-        <GridItem area="props" bgColor={"blue"}>
+        <GridItem area="props" bgColor={"red"}>
           Props
         </GridItem>
       </Show>
