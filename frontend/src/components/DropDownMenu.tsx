@@ -1,12 +1,14 @@
 import { Box, Button, Menu, MenuItem } from "@chakra-ui/react";
 import "../style/drop-down-menu.css";
 import { useState } from "react";
+import { Block } from "../modules";
 
 interface Props {
   title: String;
+  blocks: Block[] | null;
 }
 
-const DropDownMenu = ({ title }: Props) => {
+const DropDownMenu = ({ title, blocks }: Props) => {
   const [isOpen, setIsOpen] = useState<Boolean>(false);
 
   return (
@@ -23,10 +25,9 @@ const DropDownMenu = ({ title }: Props) => {
         className={"expandable-menu " + (isOpen ? "drop-open" : "drop-close")}
       >
         <Menu>
-          <MenuItem className="menu-item">Item 1</MenuItem>
-          <MenuItem className="menu-item">Item 2</MenuItem>
-          <MenuItem className="menu-item">Item 3</MenuItem>
-          <MenuItem className="menu-item">Item 4</MenuItem>
+          {blocks?.map((block) => {
+            return <MenuItem className="menu-item">{block.name}</MenuItem>;
+          })}
         </Menu>
       </Box>
     </div>

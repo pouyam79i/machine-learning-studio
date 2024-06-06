@@ -2,6 +2,7 @@ import { Grid, GridItem, Show } from "@chakra-ui/react";
 import NavBar from "./components/NavBar";
 import ToolsPanel from "./components/ToolsPanel";
 import "./App.css";
+import modules from "./modules";
 
 function App() {
   return (
@@ -22,7 +23,7 @@ function App() {
       </GridItem>
 
       <GridItem area="tools" bgColor={"black"}>
-        <ToolsPanel />
+        <ToolsPanel tools={modules.tools} />
       </GridItem>
 
       <GridItem area="main" bgColor={"orange"}>
