@@ -62,3 +62,7 @@ class core():
             return self.simple_build(input['components'])
         
         return ''
+
+    # another way to call run
+    def __call__(self, input:dict):
+        self.run(input)
