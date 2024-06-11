@@ -1,5 +1,16 @@
+interface field {
+  id: string;
+  title: string;
+  tag: string;
+}
+
+export interface BlockProps {
+  fields: field[];
+}
+
 export interface Block {
   name: String;
+  props: BlockProps | null;
 }
 
 export interface Tool {
@@ -18,9 +29,29 @@ const modules: Modules = {
       blocks: [
         {
           name: "Import CSV",
+          props: {
+            fields: [
+              {
+                id: "0",
+                title: "Address",
+                tag: "addr",
+              },
+              {
+                id: "1",
+                title: "Features",
+                tag: "features",
+              },
+              {
+                id: "2",
+                title: "Targets",
+                tag: "targets",
+              },
+            ],
+          },
         },
         {
           name: "Iris Dataset",
+          props: null,
         },
       ],
     },
@@ -29,9 +60,10 @@ const modules: Modules = {
       blocks: [
         {
           name: "Linear Regression",
+          props: null,
         },
-        { name: "K-NN" },
-        { name: "Random Forest" },
+        { name: "K-NN", props: null },
+        // { name: "Random Forest", props: null },
       ],
     },
     {
@@ -39,6 +71,7 @@ const modules: Modules = {
       blocks: [
         {
           name: "Dot-Line",
+          props: null,
         },
       ],
     },

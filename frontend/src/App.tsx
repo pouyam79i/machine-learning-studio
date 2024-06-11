@@ -2,9 +2,13 @@ import { Grid, GridItem, Show } from "@chakra-ui/react";
 import NavBar from "./components/NavBar";
 import ToolsPanel from "./components/ToolsPanel";
 import "./App.css";
-import modules from "./modules";
+import modules, { BlockProps } from "./modules";
+import PropsMenu from "./components/PropsMenu";
+import { useState } from "react";
 
 function App() {
+  const [selectedBlock, setSelectedBlock] = useState<BlockProps | null>(null);
+
   return (
     <Grid
       templateAreas={{
@@ -23,7 +27,12 @@ function App() {
       </GridItem>
 
       <GridItem area="tools" bgColor={"black"}>
-        <ToolsPanel tools={modules.tools} />
+        <ToolsPanel
+          tools={modules.tools}
+          onSelectBlock={(props: BlockProps | null) => {
+            setSelectedBlock(props);
+          }}
+        />
       </GridItem>
 
       <GridItem area="main" bgColor={"orange"}>
@@ -31,7 +40,7 @@ function App() {
       </GridItem>
       <Show above="lg">
         <GridItem area="props" bgColor={"red"}>
-          Props
+          <PropsMenu props={selectedBlock} />
         </GridItem>
       </Show>
     </Grid>
