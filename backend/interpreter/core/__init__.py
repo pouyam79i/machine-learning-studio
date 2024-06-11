@@ -1,1 +1,1 @@
-from core import core
+from .core import core

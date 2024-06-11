@@ -1,30 +1,36 @@
 from typing import Dict, List
 import heapq
+import os
+
+BASE_ADDR = "./core/modules/"
 
 class core():
 
     # use to get import component code
     def selector_import(self, type:str) -> str:
+        print("import got:"+ type )
         module = {
             'csv':'import-csv.py'
         }
-        f = open("./modules/import/"+module[type], "r")
+        f = open(BASE_ADDR+"import/"+module[type], "r")
         return f.read()
         
     # use to get machine learning component code
     def selector_ml(self, type:str) -> str:
+        print("ml got:"+ type )
         module = {
             'lin-reg':'lin-reg.py'
         }
-        f = open("./modules/ml/"+module[type], "r")
+        f = open(BASE_ADDR+"ml/"+module[type], "r")
         return f.read()
 
     # use to get display component code
     def selector_display(self, type:str) -> str:
+        print("display got:"+ type )
         module = {
             'dot-line':'dot-line.py'
         }
-        f = open("./modules/display/"+module[type], "r")
+        f = open(BASE_ADDR+"display/"+module[type], "r")
         return f.read()
 
     # build a file
@@ -35,6 +41,7 @@ class core():
         priority = 0
         
         for item in components:
+            print(item)
             code = ''
             type = item['type']
             if type.startswith('import'):
@@ -42,15 +49,15 @@ class core():
                 code = self.selector_import(type.removeprefix('import-'))
             elif type.startswith('ml'):
                 priority = 1
-                code = self.selector_import(type.removeprefix('ml-'))
+                code = self.selector_ml(type.removeprefix('ml-'))
             elif type.startswith('display'):
                 priority = 2 
-                code = self.selector_import(type.removeprefix('display-'))
-            heapq.heappush((priority, code))
+                code = self.selector_display(type.removeprefix('display-'))
+            heapq.heappush(heap, (priority, code))
                 
         output = ''
         while len(heap) > 0:
-            code = heapq.heappop(heap)
+            _, code = heapq.heappop(heap)
             output += code + '\n'
         
         return output
@@ -65,4 +72,6 @@ class core():
 
     # another way to call run
     def __call__(self, input:dict):
-        self.run(input)
+        cwd = os.getcwd()
+        print(cwd)
+        return self.run(input)

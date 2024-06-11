@@ -4,13 +4,15 @@ from flask import Flask, jsonify, request
 
 app = Flask(__name__)
 
-interpreter = core()
-
 def process(raw_data):
+    interpreter = core()
+    # try:
     data = json.loads(raw_data)
     ready_code = interpreter(data)
     print(ready_code)
-    # todo: send this code to ml engine
+        # todo: send this code to ml engine
+    # except:
+    #     print("Failed to interpret")
 
 @app.route('/interpret', methods=['POST'])
 def interpret():
