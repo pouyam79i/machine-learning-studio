@@ -1,11 +1,12 @@
 #root {
   --text-color: white;
-  --background-color: black;
+  --background-color: #282a36;
+  --nav-background: #373a4b;
+  --side-background: #44475a;
 }
 
 * {
   color: var(--text-color);
-  background-color: var(--background-color);
 }
 
 body {
@@ -14,17 +15,21 @@ body {
 }
 
 .nav-bar {
-  background-color: black;
+  background-color: var(--nav-background);
+  height: 100%;
 }
 
 .main-panel {
+  background-color: var(--background-color);
   height: 95vh;
 }
 
 .tools-panel {
+  background-color: var(--side-background);
   height: 100%;
 }
 
 .props-panel {
+  background-color: var(--side-background);
   height: 100%;
 }
