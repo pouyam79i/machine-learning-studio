@@ -1,27 +1,6 @@
 /**
  * Modules contains every tools needed in this project.
  *
- * Modules contains{
- *  items: [
- *    {id: integer,
- *    title: string,
- *    tags: string,
- *    props: null or [
- *        {
- *          id: integer,
- *          title: string,
- *          tag: string,
- *          type: string -> contain type of component used in props
- *        },
- *      ],
- *     items: null or [
- *       // sub items with same structure.
- *     ]
- *   },
- * ],
- * // other configurations
- *}
- *
  * @type {{ items: [{
  *  id: number,
  *  title: string,
@@ -31,12 +10,10 @@
  *   title: string,
  *   tag: string,
  *   type: string
- *  }]
- *   items: null or [
- *  // sub items with same structure.
- * ]
- * }
- * ]; }}
+ *  },]
+ *   items: null or [Item]
+ * }];
+ *  }}
  */
 const Modules = {
   items: [
