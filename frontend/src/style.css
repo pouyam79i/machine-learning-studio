@@ -1,0 +1,30 @@
+#root {
+  --text-color: white;
+  --background-color: black;
+}
+
+* {
+  color: var(--text-color);
+  background-color: var(--background-color);
+}
+
+body {
+  min-height: 100vh;
+  min-width: 100%;
+}
+
+.nav-bar {
+  background-color: black;
+}
+
+.main-panel {
+  height: 95vh;
+}
+
+.tools-panel {
+  height: 100%;
+}
+
+.props-panel {
+  height: 100%;
+}
