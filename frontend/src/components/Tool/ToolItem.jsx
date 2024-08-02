@@ -23,6 +23,11 @@ const ToolItem = ({ item = null }) => {
   return (
     <div className="tool-item">
       <button
+        style={{
+          background:
+            expandMenu && item.items ? "var(--selected-background)" : "",
+        }}
+        className="btn btn-dark"
         onClick={() => {
           let newExpandValue = !expandMenu;
           setExpandMenu(newExpandValue);
@@ -31,7 +36,29 @@ const ToolItem = ({ item = null }) => {
           }
         }}
       >
-        {item.title}
+        <>{item.title}</>
+        {item.items && (
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="20"
+            height="20"
+            viewBox="0 0 16 16"
+            fill="none"
+            style={{
+              rotate: expandMenu ? "270deg" : "180deg",
+              transition: "rotate 200ms ease-in-out",
+            }}
+          >
+            <path
+              opacity="0.4"
+              d="M8.90666 5.64667L6.56 8L8.90666 10.3533"
+              stroke="var(--text-color)"
+              stroke-width="2.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+        )}
       </button>
       {item.items && expandMenu && <ToolMenu items={item.items}></ToolMenu>}
     </div>

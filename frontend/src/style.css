@@ -1,8 +1,11 @@
+/* General */
 #root {
   --text-color: white;
   --background-color: #282a36;
   --nav-background: #373a4b;
   --side-background: #44475a;
+  --btn-active-hover: #424649;
+  --selected-background: #bd93f9;
 }
 
 * {
@@ -14,21 +17,41 @@ body {
   min-width: 100%;
 }
 
+/* Nav Bar */
 .nav-bar {
   background-color: var(--nav-background);
   height: 100%;
 }
 
+/* Main Panel */
 .main-panel {
   background-color: var(--background-color);
   height: 95vh;
 }
 
+/* Tool Panel */
 .tools-panel {
   background-color: var(--side-background);
   height: 100%;
+  padding: 4px;
 }
 
+.tool-item {
+  padding-left: 8px;
+}
+
+.tool-item button {
+  background-color: rgba(0, 0, 0, 0);
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  border: none;
+  /* border-radius: 0px; */
+}
+
+/* Props Panel */
 .props-panel {
   background-color: var(--side-background);
   height: 100%;
