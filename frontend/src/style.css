@@ -11,20 +11,20 @@
 }
 
 * {
-  color: var(--text-color);
-
   font-family: "Manrope", sans-serif;
   font-optical-sizing: auto;
   font-weight: 500;
 }
 
 body {
+  color: var(--text-color);
   min-height: 100vh;
   min-width: 100%;
 }
 
 /* Nav Bar */
 .nav-bar {
+  color: var(--text-color);
   background-color: var(--nav-background);
   height: 100%;
 }
@@ -37,6 +37,7 @@ body {
 
 /* Tool Panel */
 .tools-panel {
+  color: var(--text-color);
   background-color: var(--side-background);
   height: 100%;
   padding: 2px;
@@ -60,6 +61,7 @@ body {
 
 /* Props Panel */
 .props-panel {
+  color: var(--text-color);
   background-color: var(--side-background);
   height: 100%;
 }
