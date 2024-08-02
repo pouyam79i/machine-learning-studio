@@ -1,4 +1,6 @@
 /* General */
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap");
+
 #root {
   --text-color: white;
   --background-color: #282a36;
@@ -10,6 +12,10 @@
 
 * {
   color: var(--text-color);
+
+  font-family: "Manrope", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 500;
 }
 
 body {
@@ -33,15 +39,16 @@ body {
 .tools-panel {
   background-color: var(--side-background);
   height: 100%;
-  padding: 4px;
+  padding: 2px;
 }
 
 .tool-item {
-  padding-left: 8px;
+  padding-left: 5px;
 }
 
 .tool-item button {
   background-color: rgba(0, 0, 0, 0);
+  font-weight: bold;
   width: 100%;
   display: flex;
   flex-direction: row;
