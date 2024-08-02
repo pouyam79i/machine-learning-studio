@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ToolMenu from "./ToolMenu";
 import { useContext } from "react";
 import { Context } from "../../App";
@@ -8,7 +8,7 @@ import { Context } from "../../App";
  * @param {item} item
  * @returns Menu for that level of items
  */
-const ToolItem = ({ item = null }) => {
+const ToolItem = ({ item = null, url = "/" }) => {
   // expand value tells if there is a menu you can show it or not
   // it also shows active select for current item
   const [expandMenu, setExpandMenu] = useState(false);
@@ -29,9 +29,10 @@ const ToolItem = ({ item = null }) => {
         }}
         className="btn btn-dark"
         onClick={() => {
+          console.log(url);
           let newExpandValue = !expandMenu;
           setExpandMenu(newExpandValue);
-          if (newExpandValue) {
+          if (newExpandValue && item.props) {
             changeSelectedItem(item);
           }
         }}
@@ -53,14 +54,16 @@ const ToolItem = ({ item = null }) => {
               opacity="0.4"
               d="M8.90666 5.64667L6.56 8L8.90666 10.3533"
               stroke="var(--text-color)"
-              stroke-width="2.5"
-              stroke-linecap="round"
-              stroke-linejoin="round"
+              strokeWidth="2.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
             />
           </svg>
         )}
       </button>
-      {item.items && expandMenu && <ToolMenu items={item.items}></ToolMenu>}
+      {item.items && expandMenu && (
+        <ToolMenu items={item.items} url={url}></ToolMenu>
+      )}
     </div>
   );
 };

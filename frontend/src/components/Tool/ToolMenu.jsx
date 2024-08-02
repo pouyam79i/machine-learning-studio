@@ -7,7 +7,7 @@ import ToolItem from "./ToolItem";
  * @param {items} items
  * @returns a menu for List of items
  */
-const ToolMenu = ({ items = null }) => {
+const ToolMenu = ({ items = null, url = "/" }) => {
   if (items == null || items.length == 0) {
     console.log("No items!");
     return null;
@@ -15,7 +15,13 @@ const ToolMenu = ({ items = null }) => {
   return (
     <div className="tool-menu">
       {items.map((item) => {
-        return <ToolItem key={item.id} item={item}></ToolItem>;
+        return (
+          <ToolItem
+            key={item.id}
+            item={item}
+            url={url + "/" + item.tag}
+          ></ToolItem>
+        );
       })}
     </div>
   );

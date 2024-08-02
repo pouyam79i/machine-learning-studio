@@ -11,7 +11,7 @@ import Modules from "../modules";
 const ToolsPanel = () => {
   return (
     <div className="tools-panel">
-      <ToolMenu items={Modules.items}></ToolMenu>
+      <ToolMenu items={Modules.items} url="/tools"></ToolMenu>
     </div>
   );
 };
