@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useState } from "react";
 import {
   ReactFlow,
   useNodesState,
@@ -6,21 +6,32 @@ import {
   MiniMap,
   Controls,
   Background,
+  applyNodeChanges,
+  applyEdgeChanges,
 } from "@xyflow/react";
 
 import "@xyflow/react/dist/style.css";
 
 const DiagramEngine = () => {
-  // node hook
-  const [nodes, setNodes, onNodesChange] = useNodesState();
-  // edge hook
-  const [edges, setEdges, onEdgesChange] = useEdgesState();
-  // TODO: callback for nodes-connecting events
-  const onConnect = useCallback();
-  // TODO: callback for nodes-disconnecting events
-  const onDisconnect = useCallback();
-  // TODO: callback for node-prop-changing events
-  const onChange = useCallback();
+  // nodes list
+  const [nodes, setNodes] = useState();
+  // edges list
+  const [edges, setEdges] = useState();
+
+  // handle node changes
+  const onNodesChange = useCallback(
+    (changes) => setNodes((nds) => applyNodeChanges(changes, nds)),
+    []
+  );
+  // handle edge changes
+  const onEdgesChange = useCallback(
+    (changes) => setEdges((eds) => applyEdgeChanges(changes, eds)),
+    []
+  );
+  const onConnect = useCallback(
+    (params) => setEdges((eds) => addEdge(params, eds)),
+    []
+  );
 
   return (
     <ReactFlow
@@ -29,9 +40,10 @@ const DiagramEngine = () => {
       onNodesChange={onNodesChange}
       onEdgesChange={onEdgesChange}
       onConnect={onConnect}
+      fitView
     >
       <Controls />
-      <MiniMap />
+      <MiniMap nodeStrokeWidth={3} zoomable pannable />
       <Background variant="dots" gap={12} size={1} />
     </ReactFlow>
   );
