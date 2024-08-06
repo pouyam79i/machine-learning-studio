@@ -1,0 +1,24 @@
+.node-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.default-node-style {
+  width: 250px;
+  height: 75px;
+  border: 1px solid #00000000;
+  padding: 5px;
+  border-radius: 16px;
+}
+
+.simple-node {
+  background: white;
+}
+
+.simple-node input {
+  background-color: rgba(197, 197, 197, 0.247);
+  border-radius: 16px;
+  padding: 4px;
+}
