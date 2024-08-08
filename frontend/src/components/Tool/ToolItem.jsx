@@ -31,8 +31,14 @@ const ToolItem = ({ item = null, url = "/" }) => {
 
     let args = {
       type: "SimpleNode",
-      data: { title: item.title, tag: item.tag, post: getNodePostByUrl(url) },
+      data: {
+        title: item.title,
+        tag: item.tag,
+        post: getNodePostByUrl(url),
+        props: item.props,
+      },
     };
+
     args = JSON.stringify(args);
     event.dataTransfer.setData("application/reactflow", args);
     event.dataTransfer.effectAllowed = "move";

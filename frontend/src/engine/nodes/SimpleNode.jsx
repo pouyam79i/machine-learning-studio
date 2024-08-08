@@ -1,6 +1,7 @@
-import { useCallback } from "react";
+import { useCallback, useContext } from "react";
 import { Handle, Position } from "@xyflow/react";
 import { nodeStyle } from "./createNode";
+import { Context } from "../../App";
 
 import React from "react";
 
@@ -10,10 +11,17 @@ const SimpleNode = ({ data }) => {
     // TODO: handle node changes
   }, []);
 
+  const {
+    useItem: { changeSelectedItem },
+  } = useContext(Context);
+
   return (
     <div
       className="default-node-style simple-node node-container"
       style={nodeStyle(data.status, data.post)}
+      onClick={() => {
+        changeSelectedItem(data);
+      }}
     >
       {data.post !== "source" && (
         <Handle type="source" position={Position.Left} />

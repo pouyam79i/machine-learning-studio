@@ -14,17 +14,21 @@ const NODE_TARGET_URLs = ["charts"];
  */
 export const createSimpleNode = (
   position = { x: 0, y: 0 },
-  data = { title: "", tag: "", post: "inner" }
+  data = { title: "", tag: "", post: "inner", props: {} }
 ) => {
+  const id = uuid();
   const newNode = {
-    id: uuid(), // TODO: generate uuid
+    id: id, // TODO: generate uuid
     type: "SimpleNode",
     position: position,
     data: {
+      id: id,
       title: data.title,
       status: "inactive", // we have: inactive (default), active, disabled, done.
       tag: data.tag,
       post: data.post,
+      props: data.props,
+      isNode: true, // it will be used to distinguish nodes from items
     },
   };
   return newNode;
