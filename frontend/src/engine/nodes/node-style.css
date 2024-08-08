@@ -1,3 +1,13 @@
+:root {
+  --source-node-color: #8be9fd;
+  --target-node-color: #ff79c6;
+  --default-node-color: #ffb86c;
+  --inactive-node-color: #bd93f9;
+  --disabled-node-color: #6272a4;
+  --done-node-color: #50fa7b;
+  --label-background-color: rgba(245, 245, 245, 0.5);
+}
+
 .node-container {
   display: flex;
   flex-direction: column;
@@ -8,17 +18,19 @@
 .default-node-style {
   width: 250px;
   height: 75px;
-  border: 1px solid #00000000;
+  border: 1px solid;
   padding: 5px;
   border-radius: 16px;
 }
 
 .simple-node {
-  background: white;
+  background-color: var(--inactive-node-background);
+  border-color: var(--default-node-color);
 }
 
 .simple-node input {
-  background-color: rgba(197, 197, 197, 0.247);
+  background-color: var(--label-background-color);
   border-radius: 16px;
   padding: 4px;
+  text-align: center;
 }

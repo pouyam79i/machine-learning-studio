@@ -1,5 +1,6 @@
 import { useCallback } from "react";
 import { Handle, Position } from "@xyflow/react";
+import { nodeStyle } from "./createNode";
 
 import React from "react";
 
@@ -9,7 +10,10 @@ const SimpleNode = ({ data }) => {
   }, []);
 
   return (
-    <div className="default-node-style simple-node node-container">
+    <div
+      className="default-node-style simple-node node-container"
+      style={nodeStyle(data.status, data.position)}
+    >
       <Handle type="source" position={Position.Left} />
       {data.title && <h5 className="title">{data.title}</h5>}
       <div>
