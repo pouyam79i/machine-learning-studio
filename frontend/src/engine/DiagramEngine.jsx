@@ -1,3 +1,4 @@
+// importing libs
 import React, { useCallback, useMemo, useState } from "react";
 import { createSimpleNode } from "./nodes/createNode";
 import SimpleNode from "./nodes/SimpleNode";
@@ -8,13 +9,16 @@ import {
   Background,
   applyNodeChanges,
   applyEdgeChanges,
+  addEdge,
 } from "@xyflow/react";
 
+// importing styles
 import "@xyflow/react/dist/style.css";
 import "./nodes/node-style.css";
 
 const DiagramEngine = () => {
   // TODO : remove test **********
+
   const initialNodes = [
     createSimpleNode("Title", "label", "tag").node,
     createSimpleNode("Title", "label", "tag").node,
@@ -27,28 +31,35 @@ const DiagramEngine = () => {
   // nodes list
   const [nodes, setNodes] = useState(initialNodes);
   // edges list
-  const [edges, setEdges] = useState();
+  const [edges, setEdges] = useState([]);
 
   // handle node changes
   const onNodesChange = useCallback(
-    (changes) => setNodes((nds) => applyNodeChanges(changes, nds)),
-    []
+    (changes) => {
+      setNodes((oldNodes) => applyNodeChanges(changes, oldNodes));
+    },
+    [setNodes]
   );
   // handle edge changes
   const onEdgesChange = useCallback(
-    (changes) => setEdges((eds) => applyEdgeChanges(changes, eds)),
-    []
+    (changes) => {
+      setEdges((oldEdges) => applyEdgeChanges(changes, oldEdges));
+    },
+    [setEdges]
   );
+  // handle adding new connections
   const onConnect = useCallback(
-    (params) => setEdges((eds) => addEdge(params, eds)),
-    []
+    (connection) => {
+      setEdges((oldEdges) => addEdge(connection, oldEdges));
+    },
+    [setEdges]
   );
 
   return (
     <ReactFlow
       nodes={nodes}
-      edges={edges}
       onNodesChange={onNodesChange}
+      edges={edges}
       onEdgesChange={onEdgesChange}
       onConnect={onConnect}
       nodeTypes={nodeTypes}

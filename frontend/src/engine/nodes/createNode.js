@@ -9,7 +9,6 @@ export const createSimpleNode = (title = "", tag = "") => {
       title: title,
       status: "inactive", // we have: inactive, active, disabled, done.
       tag: tag,
-      container: {}, // save other properties if required.
     },
   };
   return {
