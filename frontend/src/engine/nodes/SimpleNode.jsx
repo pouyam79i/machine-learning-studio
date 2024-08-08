@@ -12,7 +12,7 @@ const SimpleNode = ({ data }) => {
   return (
     <div
       className="default-node-style simple-node node-container"
-      style={nodeStyle(data.status, data.position)}
+      style={nodeStyle(data.status, data.post)}
     >
       <Handle type="source" position={Position.Left} />
       {data.title && <h5 className="title">{data.title}</h5>}

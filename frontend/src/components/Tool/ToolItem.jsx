@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import ToolMenu from "./ToolMenu";
 import { useContext } from "react";
 import { Context } from "../../App";
+import { getNodePostByUrl } from "../../engine/nodes/createNode";
 
 /**
  * data of a tool item
@@ -27,11 +28,13 @@ const ToolItem = ({ item = null, url = "/" }) => {
    */
   const onDragStart = (event) => {
     if (item.items) return; // not a tool!
-    event.dataTransfer.setData("application/reactflow", {
-      nodeURL: url,
-      nodeTitle: item.title,
-      nodeTag: item.tag,
-    });
+
+    let args = {
+      type: "SimpleNode",
+      data: { title: item.title, tag: item.tag, post: getNodePostByUrl(url) },
+    };
+    args = JSON.stringify(args);
+    event.dataTransfer.setData("application/reactflow", args);
     event.dataTransfer.effectAllowed = "move";
   };
 
@@ -44,14 +47,13 @@ const ToolItem = ({ item = null, url = "/" }) => {
         }}
         className="btn btn-dark"
         onClick={() => {
-          console.log(url);
           let newExpandValue = !expandMenu;
           setExpandMenu(newExpandValue);
           if (newExpandValue && item.props) {
             changeSelectedItem(item);
           }
         }}
-        onDragStart={(event) => onDragStart(event)}
+        onDragStart={onDragStart}
         draggable={item.items === null || item.items.length === 0}
       >
         <>{item.title}</>

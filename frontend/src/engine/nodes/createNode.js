@@ -1,4 +1,4 @@
-import { background } from "@chakra-ui/react";
+import { background, position } from "@chakra-ui/react";
 import { v4 as uuid } from "uuid";
 
 const NODE_SOURCE_URLs = ["import"];
@@ -12,22 +12,40 @@ const NODE_TARGET_URLs = ["charts"];
  * @param {string} tag
  * @returns a simple node object
  */
-export const createSimpleNode = (title = "", tag = "", position = "inner") => {
-  let newNode = {
+export const createSimpleNode = (
+  position = { x: 0, y: 0 },
+  data = { title: "", tag: "", post: "inner" }
+) => {
+  const newNode = {
     id: uuid(), // TODO: generate uuid
     type: "SimpleNode",
-    position: { x: 0, y: 0 },
+    position: position,
     data: {
-      title: title,
+      title: data.title,
       status: "inactive", // we have: inactive (default), active, disabled, done.
-      tag: tag,
-      position: position,
+      tag: data.tag,
+      post: data.post,
     },
   };
-  return {
-    id: newNode.id,
-    node: newNode,
-  };
+  return newNode;
+};
+
+/**
+ * this is a factory method for creating nodes.
+ * default values give a SimpleNode.
+ * @param {string} type of node
+ * @param {object} data contains required info for node.
+ * @returns
+ */
+export const nodeFactory = (
+  type = "SimpleNode",
+  position = { x: 0, y: 0 },
+  data = { title: "", tag: "", post: "" }
+) => {
+  if (type === "SimpleNode") {
+    return createSimpleNode(position, data);
+  }
+  throw new Error("node type is not defined in node factory!");
 };
 
 /**
@@ -35,14 +53,23 @@ export const createSimpleNode = (title = "", tag = "", position = "inner") => {
  * @param {*} url
  * @returns
  */
-export const getNodePositionByUrl = (url = "/") => {
+export const getNodePostByUrl = (url = "/") => {
   let node_base_url = url.trim().split("/");
+
   if (node_base_url.length < 1) {
     console.log("no type for: " + url);
     return "no-type";
   }
-  node_base_url = node_base_url[0];
-  if (NODE_SOURCE_URL.indexOf(node_base_url) !== -1) {
+
+  let pointer = node_base_url.indexOf("tools");
+
+  if (pointer == node_base_url.length - 1) {
+    console.log("general type for: " + url);
+    return "tools";
+  }
+
+  node_base_url = node_base_url[pointer + 1];
+  if (NODE_SOURCE_URLs.indexOf(node_base_url) !== -1) {
     return "source";
   }
   if (NODE_TARGET_URLs.indexOf(node_base_url) !== -1) {
@@ -54,11 +81,11 @@ export const getNodePositionByUrl = (url = "/") => {
 // ******************************    style related functions
 /**
  *
- * @param {*} position
+ * @param {*} post
  * @returns
  */
-export const getNodeColorOnPosition = (position = "") => {
-  switch (position) {
+export const getNodeColorOnPosition = (post = "") => {
+  switch (post) {
     case "source":
       return "var(--source-node-color)";
     case "target":
@@ -71,13 +98,13 @@ export const getNodeColorOnPosition = (position = "") => {
 /**
  *
  * @param {*} status
- * @param {*} position
+ * @param {*} post
  * @returns
  */
-export const getNodeColorOnStatus = (status, position) => {
+export const getNodeColorOnStatus = (status, post) => {
   switch (status) {
     case "active":
-      return getNodeColorOnPosition(position);
+      return getNodeColorOnPosition(post);
     case "disabled":
       return "var(--disabled-node-color)";
     case "done":
@@ -90,12 +117,12 @@ export const getNodeColorOnStatus = (status, position) => {
 /**
  *
  * @param {*} status
- * @param {*} position
+ * @param {*} post
  * @returns
  */
-export const nodeStyle = (status = "", position = "") => {
+export const nodeStyle = (status = "", post = "") => {
   return {
-    borderColor: getNodeColorOnPosition(position),
-    background: getNodeColorOnStatus(status, position),
+    borderColor: getNodeColorOnPosition(post),
+    background: getNodeColorOnStatus(status, post),
   };
 };

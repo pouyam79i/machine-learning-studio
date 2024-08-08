@@ -20,9 +20,6 @@ export const Context = createContext();
 function App() {
   const [selectedItem, setSelectedItem] = useState();
   const changeSelectedItem = (newItem) => {
-    console.log(
-      "changing selected item to: " + (newItem ? newItem.title : "null")
-    );
     setSelectedItem(newItem);
   };
 
