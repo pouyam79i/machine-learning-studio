@@ -72,16 +72,12 @@ const DiagramEngineFlow = () => {
       const type = args.type;
       const data = args.data;
 
-      console.log(args);
-
       const position = screenToFlowPosition({
         x: event.clientX,
         y: event.clientY,
       });
 
       const newNode = nodeFactory(type, position, data);
-
-      console.log(newNode);
 
       setNodes((nodes) => nodes.concat(newNode));
     },

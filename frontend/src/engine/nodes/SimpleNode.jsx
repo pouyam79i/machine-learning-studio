@@ -6,7 +6,8 @@ import React from "react";
 
 const SimpleNode = ({ data }) => {
   const onChange = useCallback((evt) => {
-    console.log(evt.target.value);
+    // console.log(evt.target.value);
+    // TODO: handle node changes
   }, []);
 
   return (
