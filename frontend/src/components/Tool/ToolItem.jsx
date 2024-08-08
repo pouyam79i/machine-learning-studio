@@ -20,6 +20,21 @@ const ToolItem = ({ item = null, url = "/" }) => {
     console.log("null item");
     return null;
   }
+
+  /**
+   * custom drag start
+   * @param {html event} event
+   */
+  const onDragStart = (event) => {
+    if (item.items) return; // not a tool!
+    event.dataTransfer.setData("application/reactflow", {
+      nodeURL: url,
+      nodeTitle: item.title,
+      nodeTag: item.tag,
+    });
+    event.dataTransfer.effectAllowed = "move";
+  };
+
   return (
     <div className="tool-item">
       <button
@@ -36,6 +51,8 @@ const ToolItem = ({ item = null, url = "/" }) => {
             changeSelectedItem(item);
           }
         }}
+        onDragStart={(event) => onDragStart(event)}
+        draggable={item.items === null || item.items.length === 0}
       >
         <>{item.title}</>
         {item.items && (

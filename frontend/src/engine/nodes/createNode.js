@@ -1,6 +1,11 @@
 import { background } from "@chakra-ui/react";
 import { v4 as uuid } from "uuid";
 
+const NODE_SOURCE_URLs = ["import"];
+
+const NODE_TARGET_URLs = ["charts"];
+
+// ******************************    node builders. TODO add a factory method for builders
 /**
  * this function creates an instance of simple node
  * @param {string} title
@@ -25,6 +30,33 @@ export const createSimpleNode = (title = "", tag = "", position = "inner") => {
   };
 };
 
+/**
+ *
+ * @param {*} url
+ * @returns
+ */
+export const getNodePositionByUrl = (url = "/") => {
+  let node_base_url = url.trim().split("/");
+  if (node_base_url.length < 1) {
+    console.log("no type for: " + url);
+    return "no-type";
+  }
+  node_base_url = node_base_url[0];
+  if (NODE_SOURCE_URL.indexOf(node_base_url) !== -1) {
+    return "source";
+  }
+  if (NODE_TARGET_URLs.indexOf(node_base_url) !== -1) {
+    return "target";
+  }
+  return "inner";
+};
+
+// ******************************    style related functions
+/**
+ *
+ * @param {*} position
+ * @returns
+ */
 export const getNodeColorOnPosition = (position = "") => {
   switch (position) {
     case "source":
@@ -36,6 +68,12 @@ export const getNodeColorOnPosition = (position = "") => {
   }
 };
 
+/**
+ *
+ * @param {*} status
+ * @param {*} position
+ * @returns
+ */
 export const getNodeColorOnStatus = (status, position) => {
   switch (status) {
     case "active":
@@ -49,6 +87,12 @@ export const getNodeColorOnStatus = (status, position) => {
   }
 };
 
+/**
+ *
+ * @param {*} status
+ * @param {*} position
+ * @returns
+ */
 export const nodeStyle = (status = "", position = "") => {
   return {
     borderColor: getNodeColorOnPosition(position),
