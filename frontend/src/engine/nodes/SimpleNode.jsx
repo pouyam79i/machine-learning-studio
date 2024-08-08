@@ -14,7 +14,9 @@ const SimpleNode = ({ data }) => {
       className="default-node-style simple-node node-container"
       style={nodeStyle(data.status, data.post)}
     >
-      <Handle type="source" position={Position.Left} />
+      {data.post !== "source" && (
+        <Handle type="source" position={Position.Left} />
+      )}
       {data.title && <h5 className="title">{data.title}</h5>}
       <div>
         <input
@@ -25,7 +27,9 @@ const SimpleNode = ({ data }) => {
         />
       </div>
 
-      <Handle type="target" position={Position.Right} />
+      {data.post !== "target" && (
+        <Handle type="target" position={Position.Right} />
+      )}
     </div>
   );
 };
