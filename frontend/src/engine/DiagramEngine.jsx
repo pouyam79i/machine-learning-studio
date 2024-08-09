@@ -26,7 +26,7 @@ import "./nodes/node-style.css";
 import { Context } from "../App";
 import { runDiagram, saveDiagram } from "./engine";
 
-const flowKey = "example-flow";
+const flowKey = "ml-studio/diagrams/last";
 
 /**
  * this component contains necessary structure and functionalities for
@@ -75,6 +75,7 @@ const DiagramEngineFlow = () => {
     if (rfInstance) {
       const flow = rfInstance.toObject();
       const diagramData = JSON.stringify(flow);
+      localStorage.setItem(flowKey, diagramData);
       // TODO: save it using engine
     }
   }, [rfInstance]);

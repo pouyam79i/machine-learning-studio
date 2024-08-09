@@ -42,6 +42,7 @@ const ToolItem = ({ item = null, url = "/" }) => {
     args = JSON.stringify(args);
     event.dataTransfer.setData("application/reactflow", args);
     event.dataTransfer.effectAllowed = "move";
+    changeSelectedItem(item);
   };
 
   return (
@@ -55,7 +56,7 @@ const ToolItem = ({ item = null, url = "/" }) => {
         onClick={() => {
           let newExpandValue = !expandMenu;
           setExpandMenu(newExpandValue);
-          if (newExpandValue && item.props) {
+          if (item.props) {
             changeSelectedItem(item);
           }
         }}

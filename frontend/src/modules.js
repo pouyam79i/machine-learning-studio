@@ -65,6 +65,7 @@ const Modules = {
                   title: "Learn more about iris dataset",
                   tag: "description",
                   type: "description",
+                  href: "iris-des",
                 },
               ],
               items: null,
@@ -89,6 +90,7 @@ const Modules = {
               title: "Learn more about linear regression",
               tag: "description",
               type: "description",
+              href: "linear-reg-des",
             },
           ],
           items: null,
@@ -103,6 +105,7 @@ const Modules = {
               title: "Learn more about k-nn",
               tag: "description",
               type: "description",
+              href: "knn-des",
             },
           ],
           items: null,
@@ -125,6 +128,7 @@ const Modules = {
               title: "Learn more about linear regression",
               tag: "description",
               type: "description",
+              href: "line-graph-des",
             },
           ],
           items: null,
@@ -134,6 +138,31 @@ const Modules = {
 
     // last item id: 6
   ],
+};
+
+// This is a local offline data set for descriptions!
+// TODO: replace this with and api call but define it inside descriptions component
+const Descriptions = {
+  "iris-des":
+    "The Iris flower data set or Fisher's Iris data set is a multivariate data set used and made famous by the British statistician and biologist Ronald Fisher in his 1936 paper The use of multiple measurements in taxonomic problems as an example of linear discriminant analysis.",
+  "linear-reg-des":
+    "Linear regression is an algorithm that provides a linear relationship between an independent variable and a dependent variable to predict the outcome of future events. It is a statistical method used in data science and machine learning for predictive analysis.",
+  "knn-des":
+    "In statistics, the k-nearest neighbors algorithm is a non-parametric supervised learning method first developed by Evelyn Fix and Joseph Hodges in 1951, and later expanded by Thomas Cover. It is used for classification and regression. In both cases, the input consists of the k closest training examples in a data set.",
+  "line-graph-des":
+    "In the mathematical discipline of graph theory, the line graph of an undirected graph G is another graph L(G) that represents the adjacencies between edges of G. L(G) is constructed in the following way: for each edge in G, make a vertex in L(G); for every two edges in G that have a vertex in common, make an edge between their corresponding vertices in L(G).",
+};
+
+export const getDescriptions = (href) => {
+  let data = Descriptions[href];
+  if (data) {
+    data = data.trim();
+    if (data.length > 400) {
+      data = data.slice(0, 400) + "...";
+    }
+    return data;
+  }
+  return "No description was found!";
 };
 
 export default Modules;

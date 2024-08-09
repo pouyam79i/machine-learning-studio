@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import { Context } from "../App";
+import Description from "./Props/Description";
 
 const PropsPanel = () => {
   const {
@@ -18,7 +19,24 @@ const PropsPanel = () => {
   return (
     <div className="props-panel">
       <div className="header">{selectedItem.title}</div>
-      <div className="body">Other info</div>
+      <div className="body">
+        {selectedItem.props.map((prop, index) => {
+          switch (prop.type) {
+            case "text-field":
+              break;
+            case "description":
+              return (
+                <Description
+                  key={index}
+                  title={prop.title}
+                  href={prop.href}
+                ></Description>
+              );
+            default:
+              break;
+          }
+        })}
+      </div>
     </div>
   );
 };
