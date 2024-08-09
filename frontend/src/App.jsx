@@ -5,6 +5,7 @@ import PropsPanel from "./components/PropsPanel";
 import ToolsPanel from "./components/ToolsPanel";
 import { useState } from "react";
 import { createContext } from "react";
+import PopUp from "./components/PopUp";
 
 /**
  *  app status list.
@@ -33,6 +34,11 @@ export const Context = createContext();
 function App() {
   const [selectedItem, setSelectedItem] = useState();
   const [appStatus, setAppStatus] = useState("dev");
+  const [popupData, setPopupData] = useState({
+    title: "K-NN model on Iris",
+    url: "",
+  });
+  const [showPopUp, setShowPopUp] = useState(false);
 
   const changeSelectedItem = (newItem) => {
     setSelectedItem(newItem);
@@ -49,8 +55,17 @@ function App() {
       value={{
         useItem: { selectedItem, changeSelectedItem },
         useAppStatus: { appStatus, changeAppStatus },
+        usePopUp: { showPopUp, setShowPopUp },
       }}
     >
+      {/* pop up */}
+      <PopUp
+        title={popupData.title}
+        url={popupData.url}
+        showPopUp={showPopUp}
+        setShowPopUp={setShowPopUp}
+      ></PopUp>
+      {/* app */}
       <Grid
         templateAreas={`"nav nav nav" "tools main props"`}
         templateColumns="250px 1fr 250px"

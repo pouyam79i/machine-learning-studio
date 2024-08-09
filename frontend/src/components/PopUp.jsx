@@ -1,11 +1,24 @@
-import React from "react";
+import React, { useState } from "react";
+import irisResult from "../../public/iris_test.png";
 
-const PopUp = ({ data }) => {
+const PopUp = ({
+  title = "This is Pop Up",
+  url = "",
+  showPopUp = false,
+  setShowPopUp,
+}) => {
   return (
-    <div className="pop-up">
+    <div
+      id="pop-up-cover"
+      className="pop-up"
+      onClick={(event) => {
+        if (event.target.id == "pop-up-cover") setShowPopUp(false);
+      }}
+      style={{ display: showPopUp ? "flex" : "none" }}
+    >
       <div className="container">
-        <img></img>
-        <div className="description"></div>
+        <img src={irisResult}></img>
+        <div className="description">{title}</div>
       </div>
     </div>
   );

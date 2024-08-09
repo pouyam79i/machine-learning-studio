@@ -104,6 +104,7 @@ const DiagramEngineFlow = () => {
   // *************** hook diagram data with side effect:
   const {
     useAppStatus: { appStatus, changeAppStatus },
+    usePopUp: { showPopUp, setShowPopUp },
   } = useContext(Context);
   useEffect(() => {
     switch (appStatus) {
@@ -117,7 +118,7 @@ const DiagramEngineFlow = () => {
       // TODO: implement backend APIs
       case "run":
         // runDiagram({ nodes, setNodes }, { edges, setEdges });
-        runExample({ nodes, setNodes }, { edges, setEdges });
+        runExample({ nodes, setNodes }, { edges, setEdges }, setShowPopUp);
         break;
     }
     changeAppStatus("dev");

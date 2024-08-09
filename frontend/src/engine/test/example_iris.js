@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 
-export const runExample = (useNodes, useEdges) => {
+export const runExample = (useNodes, useEdges, setShowPopUp) => {
   const { nodes, setNodes } = useNodes;
   const { edges, setEdges } = useEdges;
   console.log("running iris test!");
@@ -79,7 +79,7 @@ export const runExample = (useNodes, useEdges) => {
     );
   }, 6000);
 
-  // TODO: display popup chart
+  // display popup chart
   setTimeout(() => {
     setNodes(
       nodes.map((node) => {
@@ -92,5 +92,6 @@ export const runExample = (useNodes, useEdges) => {
         };
       })
     );
+    setShowPopUp(true);
   }, 8000);
 };
