@@ -125,7 +125,7 @@ const Modules = {
           props: [
             {
               id: 0,
-              title: "Learn more about linear regression",
+              title: "What is Line Graph?",
               tag: "description",
               type: "description",
               href: "line-graph-des",
@@ -133,10 +133,26 @@ const Modules = {
           ],
           items: null,
         },
+
+        {
+          id: 9,
+          title: "Scatter Plot",
+          tag: "scatter_plot",
+          props: [
+            {
+              id: 0,
+              title: "What is Scatter Plot?",
+              tag: "description",
+              type: "description",
+              href: "scatter-plot-des",
+            },
+          ],
+          items: null,
+        },
       ],
     },
 
-    // last item id: 6
+    // last item id: 9
   ],
 };
 
@@ -151,6 +167,8 @@ const Descriptions = {
     "In statistics, the k-nearest neighbors algorithm is a non-parametric supervised learning method first developed by Evelyn Fix and Joseph Hodges in 1951, and later expanded by Thomas Cover. It is used for classification and regression. In both cases, the input consists of the k closest training examples in a data set.",
   "line-graph-des":
     "In the mathematical discipline of graph theory, the line graph of an undirected graph G is another graph L(G) that represents the adjacencies between edges of G. L(G) is constructed in the following way: for each edge in G, make a vertex in L(G); for every two edges in G that have a vertex in common, make an edge between their corresponding vertices in L(G).",
+  "scatter-plot-des":
+    "A scatter plot, also called a scatterplot, scatter graph, scatter chart, scattergram, or scatter diagram, is a type of plot or mathematical diagram using Cartesian coordinates to display values for typically two variables for a set of data. If the points are coded, one additional variable can be displayed.",
 };
 
 export const getDescriptions = (href) => {

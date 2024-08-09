@@ -25,6 +25,7 @@ import "@xyflow/react/dist/style.css";
 import "./nodes/node-style.css";
 import { Context } from "../App";
 import { runDiagram, saveDiagram } from "./engine";
+import { runExample } from "./test/example_iris";
 
 const flowKey = "ml-studio/diagrams/last";
 
@@ -112,8 +113,11 @@ const DiagramEngineFlow = () => {
       case "load":
         onLoad();
         break;
+      // currently run example.
+      // TODO: implement backend APIs
       case "run":
-        runDiagram(nodes, edges);
+        // runDiagram({ nodes, setNodes }, { edges, setEdges });
+        runExample({ nodes, setNodes }, { edges, setEdges });
         break;
     }
     changeAppStatus("dev");
