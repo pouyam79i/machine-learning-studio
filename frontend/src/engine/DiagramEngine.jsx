@@ -1,6 +1,6 @@
 // importing libs
 import React, { useCallback, useMemo, useState } from "react";
-import { nodeFactory } from "./nodes/createNode";
+import { getNodeColorOnStatus, nodeFactory } from "./nodes/createNode";
 import SimpleNode from "./nodes/SimpleNode";
 import {
   ReactFlow,
@@ -97,7 +97,15 @@ const DiagramEngineFlow = () => {
       fitView
     >
       <Controls />
-      <MiniMap nodeStrokeWidth={3} zoomable pannable />
+      <MiniMap
+        nodeColor={(node) => {
+          return getNodeColorOnStatus(node.data.status, node.data.post);
+        }}
+        nodeStrokeWidth={"3px"}
+        nodeBorderRadius={"16px"}
+        zoomable
+        pannable
+      />
       <Background variant="dots" gap={12} size={1} />
     </ReactFlow>
   );

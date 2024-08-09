@@ -7,6 +7,11 @@ import { useState } from "react";
 import { createContext } from "react";
 
 /**
+ *  app status list
+ */
+const APP_STATUS = ["dev", "build", "run", "done"];
+
+/**
  *  global app parameters in context.
  */
 export const Context = createContext();
@@ -19,16 +24,29 @@ export const Context = createContext();
  */
 function App() {
   const [selectedItem, setSelectedItem] = useState();
+  const [appStatus, setAppStatus] = useState("dev");
+
   const changeSelectedItem = (newItem) => {
     setSelectedItem(newItem);
   };
 
+  const changeAppStatus = (newAppStatus) => {
+    if (APP_STATUS.indexOf(newAppStatus) === -1)
+      console.log("illegal app status: " + newAppStatus);
+    else setAppStatus(newAppStatus);
+  };
+
   return (
-    <Context.Provider value={{ useItem: { selectedItem, changeSelectedItem } }}>
+    <Context.Provider
+      value={{
+        useItem: { selectedItem, changeSelectedItem },
+        useAppStatus: { appStatus, changeAppStatus },
+      }}
+    >
       <Grid
         templateAreas={`"nav nav nav" "tools main props"`}
         templateColumns="250px 1fr 250px"
-        templateRows="50px 1fr"
+        templateRows="60px 1fr"
       >
         <GridItem area="nav">
           <NavBar />
