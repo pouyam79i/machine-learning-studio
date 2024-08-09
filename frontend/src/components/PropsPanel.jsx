@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { Context } from "../App";
 import Description from "./Props/Description";
+import TextField from "./Props/TextField";
 
 const PropsPanel = () => {
   const {
@@ -23,15 +24,9 @@ const PropsPanel = () => {
         {selectedItem.props.map((prop, index) => {
           switch (prop.type) {
             case "text-field":
-              break;
+              return <TextField key={index} prop={prop}></TextField>;
             case "description":
-              return (
-                <Description
-                  key={index}
-                  title={prop.title}
-                  href={prop.href}
-                ></Description>
-              );
+              return <Description key={index} prop={prop}></Description>;
             default:
               break;
           }

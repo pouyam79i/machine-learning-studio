@@ -3,6 +3,7 @@
 
 #root {
   --text-color: white;
+  --text-color-placeholder: rgb(228, 228, 228);
   --background-color: #282a36;
   --border-color: #202022;
   --nav-background: #373a4b;
@@ -11,6 +12,7 @@
   --selected-background: #bd93f9;
   --app-title-color: #bd93f9;
   --description-background-color: rgba(0, 0, 0, 0.103);
+  --text-field-background-color: #bd93f9;
 }
 
 * {
@@ -158,4 +160,29 @@ body {
   text-align: left;
   width: 100%;
   font-size: 15px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.prop-text-field {
+  background-color: var(--description-background-color);
+  width: 100%;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.prop-text-field label {
+  font-weight: bold;
+  padding: 2px 4px 0px 4px;
+}
+
+.prop-text-field input {
+  padding: 4px;
+  margin: 4px;
+  outline: 0;
+  border: none;
+  border-radius: 8px;
+  background-color: var(--text-field-background-color);
+}
+
+.prop-text-field input::placeholder {
+  color: var(--text-color-placeholder);
 }

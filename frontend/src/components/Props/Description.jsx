@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { getDescriptions } from "../../modules";
 
-const Description = ({ title = "", href = "" }) => {
+const Description = ({ prop: { title = "", href = "" } }) => {
   // TODO: replace with and api for title description
   // const [description, setDescription] = useState("");
   // load link data
