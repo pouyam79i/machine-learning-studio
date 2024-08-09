@@ -9,7 +9,7 @@ import { createContext } from "react";
 /**
  *  app status list
  */
-const APP_STATUS = ["dev", "build", "run", "done"];
+const APP_STATUS = ["dev", "build", "run", "done", "read", "save"];
 
 /**
  *  global app parameters in context.
@@ -25,6 +25,7 @@ export const Context = createContext();
 function App() {
   const [selectedItem, setSelectedItem] = useState();
   const [appStatus, setAppStatus] = useState("dev");
+  const [diagramData, setDiagramData] = useState(null);
 
   const changeSelectedItem = (newItem) => {
     setSelectedItem(newItem);
@@ -41,6 +42,7 @@ function App() {
       value={{
         useItem: { selectedItem, changeSelectedItem },
         useAppStatus: { appStatus, changeAppStatus },
+        useDiagramData: { diagramData, setDiagramData },
       }}
     >
       <Grid

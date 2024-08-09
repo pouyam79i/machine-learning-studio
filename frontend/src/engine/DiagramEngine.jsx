@@ -1,5 +1,11 @@
 // importing libs
-import React, { useCallback, useMemo, useState } from "react";
+import React, {
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+  useState,
+} from "react";
 import { getNodeColorOnStatus, nodeFactory } from "./nodes/createNode";
 import SimpleNode from "./nodes/SimpleNode";
 import {
@@ -17,6 +23,8 @@ import {
 // importing styles
 import "@xyflow/react/dist/style.css";
 import "./nodes/node-style.css";
+import { Context } from "../App";
+import { runDiagram, saveDiagram } from "./engine";
 
 /**
  * this component contains necessary structure and functionalities for
@@ -53,6 +61,23 @@ const DiagramEngineFlow = () => {
     },
     [setEdges]
   );
+
+  // hook diagram data with side effect:
+  const {
+    useDiagramData: { setDiagramData },
+    useAppStatus: { appStatus, changeAppStatus },
+  } = useContext(Context);
+  useEffect(() => {
+    switch (appStatus) {
+      case "save":
+        saveDiagram(nodes, edges);
+        break;
+      case "run":
+        runDiagram(nodes, edges);
+        break;
+    }
+    changeAppStatus("dev");
+  }, [appStatus]);
 
   // ************** drag and drop functions:
   const { screenToFlowPosition } = useReactFlow();
