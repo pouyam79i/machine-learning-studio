@@ -1,9 +1,17 @@
 /**
  *
- * @param {*} nodes
- * @param {*} edges
+ * @param {*} data
  */
-export const saveDiagram = (nodes = [], edges = []) => {};
+export const saveDiagram = (data) => {};
+
+/**
+ *
+ * @returns
+ */
+export const loadDiagram = () => {
+  let data = {};
+  return data;
+};
 
 /**
  *

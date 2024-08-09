@@ -26,6 +26,8 @@ import "./nodes/node-style.css";
 import { Context } from "../App";
 import { runDiagram, saveDiagram } from "./engine";
 
+const flowKey = "example-flow";
+
 /**
  * this component contains necessary structure and functionalities for
  * ml studio diagram engine.
@@ -62,15 +64,52 @@ const DiagramEngineFlow = () => {
     [setEdges]
   );
 
-  // hook diagram data with side effect:
+  // *************** save / load implementation
+  const [rfInstance, setRfInstance] = useState(null); // react flow instance
+  const { setViewport } = useReactFlow();
+
+  /**
+   * diagram saver
+   */
+  const onSave = useCallback(() => {
+    if (rfInstance) {
+      const flow = rfInstance.toObject();
+      const diagramData = JSON.stringify(flow);
+      // TODO: save it using engine
+    }
+  }, [rfInstance]);
+
+  /**
+   * diagram loader
+   */
+  const onLoad = useCallback(() => {
+    const restoreFlow = async () => {
+      // TODO: load it using engine
+      const diagramData = localStorage.getItem(flowKey);
+      const flow = JSON.parse(diagramData);
+
+      if (flow) {
+        const { x = 0, y = 0, zoom = 1 } = flow.viewport;
+        setNodes(flow.nodes || []);
+        setEdges(flow.edges || []);
+        setViewport({ x, y, zoom });
+      }
+    };
+
+    restoreFlow();
+  }, [setNodes, setViewport]);
+
+  // *************** hook diagram data with side effect:
   const {
-    useDiagramData: { setDiagramData },
     useAppStatus: { appStatus, changeAppStatus },
   } = useContext(Context);
   useEffect(() => {
     switch (appStatus) {
       case "save":
-        saveDiagram(nodes, edges);
+        onSave();
+        break;
+      case "load":
+        onLoad();
         break;
       case "run":
         runDiagram(nodes, edges);
@@ -119,6 +158,7 @@ const DiagramEngineFlow = () => {
       nodeTypes={nodeTypes}
       onDrop={onDrop}
       onDragOver={onDragOver}
+      onInit={setRfInstance}
       fitView
     >
       <Controls />
