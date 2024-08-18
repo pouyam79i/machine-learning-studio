@@ -31,7 +31,9 @@ const deploy = (compiledData = {}) => {};
  * @param {*} nodes
  * @param {*} edges
  */
-export const runDiagram = ({
-  useNodes: { nodes, setNodes },
-  useEdges: { edges, setEdges },
-}) => {};
+export const runDiagram = (nodes, edges) => {
+  console.log("Nodes:");
+  console.log(nodes);
+  console.log("Edges:");
+  console.log(edges);
+};

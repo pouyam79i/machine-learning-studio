@@ -75,7 +75,7 @@ const NavBar = () => {
             changeAppStatus("load");
           }}
         >
-          <div>Load</div>
+          <div>Restore</div>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="var(--text-color)"

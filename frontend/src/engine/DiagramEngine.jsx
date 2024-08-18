@@ -87,7 +87,7 @@ const DiagramEngineFlow = () => {
   /**
    * diagram loader
    */
-  const onLoad = useCallback(() => {
+  const onRestore = useCallback(() => {
     const restoreFlow = async () => {
       // TODO: load it using engine
       const diagramData = localStorage.getItem(flowKey);
@@ -115,13 +115,10 @@ const DiagramEngineFlow = () => {
         onSave();
         break;
       case "load":
-        onLoad();
+        onRestore();
         break;
-      // currently run example.
-      // TODO: implement backend APIs
       case "run":
-        runDiagram({ nodes, setNodes }, { edges, setEdges });
-        // runExample({ nodes, setNodes }, { edges, setEdges }, setShowPopUp);
+        runDiagram(nodes, edges);
         break;
     }
     changeAppStatus("dev");
