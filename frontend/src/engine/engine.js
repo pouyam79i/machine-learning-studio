@@ -1,39 +1,46 @@
 /**
- *
- * @param {*} data
+ * This function reduces object size of diagram data
+ * before sending it to backend.
+ * Also makes the data ready for backend.
+ * @param {Array} nodes all nodes at run time
+ * @param {Array} edges all edges at run time
  */
-export const saveDiagram = (data) => {};
-
-/**
- *
- * @returns
- */
-export const loadDiagram = () => {
-  let data = {};
-  return data;
+const prepareData = (nodes = [], edges = []) => {
+  return {
+    nodes: nodes.map((node) => {
+      return {
+        id: node.id,
+        props: node.data.props,
+        status: node.data.status,
+        tag: node.data.tag,
+      };
+    }),
+    edges: edges.map((edge) => {
+      return {
+        id: edge.id,
+        source: edge.source,
+        target: edge.target,
+      };
+    }),
+  };
 };
 
 /**
- *
- * @param {*} nodes
- * @param {*} edges
+ * This function deploys a connection between frontend and backend.
+ * also updates ui if required
+ * @param {Object} data ready data to send to backend.
+ * @param {Object} options additional frontend options. like popups
  */
-const compiler = (nodes = [], edges = []) => {};
+const deploy = (data = {}, options = {}) => {
+  console.log(data);
+};
 
 /**
- *
- * @param {*} compiledData
+ * This function handles running process.
+ * @param {Array} nodes all nodes at run time
+ * @param {Array} edges all edges at run time
  */
-const deploy = (compiledData = {}) => {};
-
-/**
- *
- * @param {*} nodes
- * @param {*} edges
- */
-export const runDiagram = (nodes, edges) => {
-  console.log("Nodes:");
-  console.log(nodes);
-  console.log("Edges:");
-  console.log(edges);
+export const runDiagram = (nodes, edges, options = {}) => {
+  let data = prepareData(nodes, edges, options);
+  deploy(data);
 };

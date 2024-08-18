@@ -25,8 +25,7 @@ import {
 import "@xyflow/react/dist/style.css";
 import "./nodes/node-style.css";
 import { Context } from "../App";
-import { runDiagram, saveDiagram } from "./engine";
-import { runExample } from "./test/example_iris";
+import { runDiagram } from "./engine";
 
 const flowKey = "ml-studio/diagrams/last";
 
@@ -109,6 +108,7 @@ const DiagramEngineFlow = () => {
     useAppStatus: { appStatus, changeAppStatus },
     usePopUp: { showPopUp, setShowPopUp },
   } = useContext(Context);
+  // Apply changes with side effect
   useEffect(() => {
     switch (appStatus) {
       case "save":
