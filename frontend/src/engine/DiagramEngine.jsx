@@ -1,5 +1,6 @@
 // importing libs
 import React, {
+  createContext,
   useCallback,
   useContext,
   useEffect,
@@ -28,6 +29,8 @@ import { runDiagram, saveDiagram } from "./engine";
 import { runExample } from "./test/example_iris";
 
 const flowKey = "ml-studio/diagrams/last";
+
+export const DiagramContext = createContext();
 
 /**
  * this component contains necessary structure and functionalities for
@@ -117,8 +120,8 @@ const DiagramEngineFlow = () => {
       // currently run example.
       // TODO: implement backend APIs
       case "run":
-        // runDiagram({ nodes, setNodes }, { edges, setEdges });
-        runExample({ nodes, setNodes }, { edges, setEdges }, setShowPopUp);
+        runDiagram({ nodes, setNodes }, { edges, setEdges });
+        // runExample({ nodes, setNodes }, { edges, setEdges }, setShowPopUp);
         break;
     }
     changeAppStatus("dev");
@@ -155,30 +158,37 @@ const DiagramEngineFlow = () => {
   );
 
   return (
-    <ReactFlow
-      nodes={nodes}
-      onNodesChange={onNodesChange}
-      edges={edges}
-      onEdgesChange={onEdgesChange}
-      onConnect={onConnect}
-      nodeTypes={nodeTypes}
-      onDrop={onDrop}
-      onDragOver={onDragOver}
-      onInit={setRfInstance}
-      fitView
+    <DiagramContext.Provider
+      value={{
+        nodeRelated: [nodes, setNodes],
+        edgeRelated: [edges, setEdges],
+      }}
     >
-      <Controls />
-      <MiniMap
-        nodeColor={(node) => {
-          return getNodeColorOnStatus(node.data.status, node.data.post);
-        }}
-        nodeStrokeWidth={"3px"}
-        nodeBorderRadius={"16px"}
-        zoomable
-        pannable
-      />
-      <Background variant="dots" gap={12} size={1} />
-    </ReactFlow>
+      <ReactFlow
+        nodes={nodes}
+        onNodesChange={onNodesChange}
+        edges={edges}
+        onEdgesChange={onEdgesChange}
+        onConnect={onConnect}
+        nodeTypes={nodeTypes}
+        onDrop={onDrop}
+        onDragOver={onDragOver}
+        onInit={setRfInstance}
+        fitView
+      >
+        <Controls />
+        <MiniMap
+          nodeColor={(node) => {
+            return getNodeColorOnStatus(node.data.status, node.data.post);
+          }}
+          nodeStrokeWidth={"3px"}
+          nodeBorderRadius={"16px"}
+          zoomable
+          pannable
+        />
+        <Background variant="dots" gap={12} size={1} />
+      </ReactFlow>
+    </DiagramContext.Provider>
   );
 };
 

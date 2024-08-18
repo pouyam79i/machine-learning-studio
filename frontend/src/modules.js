@@ -149,6 +149,21 @@ const Modules = {
           ],
           items: null,
         },
+        {
+          id: 10,
+          title: "New Plot",
+          tag: "new_plot",
+          props: [
+            {
+              id: 0,
+              title: "What is Scatter Plot?",
+              tag: "description",
+              type: "description",
+              href: "scatter-plot-des",
+            },
+          ],
+          items: null,
+        },
       ],
     },
 

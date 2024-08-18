@@ -1,14 +1,41 @@
-import { useCallback, useContext } from "react";
+import { useCallback, useContext, useEffect, useState } from "react";
 import { Handle, Position } from "@xyflow/react";
 import { nodeStyle } from "./createNode";
 import { Context } from "../../App";
+import { DiagramContext } from "../DiagramEngine";
 
 import React from "react";
 
 const SimpleNode = ({ data }) => {
-  const onChange = useCallback((evt) => {
-    // console.log(evt.target.value);
-    // TODO: handle node changes
+  const [isValueChanged, setIsValueChanged] = useState(false);
+
+  const {
+    nodeRelated: [nodes, setNodes],
+  } = useContext(DiagramContext);
+
+  const onChange = useCallback(() => {
+    setIsValueChanged(true);
+  }, []);
+
+  const onKeyDown = useCallback((evt) => {
+    if (evt.code == "Enter") {
+      setIsValueChanged(false);
+      setNodes((nds) =>
+        nds.map((node) => {
+          if (node.id === data.id) {
+            return {
+              ...node,
+              data: {
+                ...node.data,
+                label: evt.target.value,
+              },
+            };
+          }
+
+          return node;
+        })
+      );
+    }
   }, []);
 
   const {
@@ -31,8 +58,11 @@ const SimpleNode = ({ data }) => {
         <input
           name="text"
           placeholder="Your label..."
-          onChange={onChange}
+          onKeyDown={onKeyDown}
           className="nodrag"
+          defaultValue={data.label}
+          onChange={onChange}
+          style={{ border: isValueChanged ? "1px solid red" : "none" }}
         />
       </div>
 

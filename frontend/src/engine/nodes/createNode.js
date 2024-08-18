@@ -29,6 +29,7 @@ export const createSimpleNode = (
       post: data.post,
       props: data.props,
       isNode: true, // it will be used to distinguish nodes from items
+      label: "", // save the label value here.
     },
   };
   return newNode;

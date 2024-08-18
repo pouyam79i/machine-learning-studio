@@ -9,7 +9,7 @@ export const runExample = (useNodes, useEdges, setShowPopUp) => {
   // 1- run iris loader!
   setNodes(
     nodes.map((node) => {
-      if (node.id == "cc8529b9-ad6c-4edb-9a14-c8236ca64abc")
+      if (node.id == "9a4d80e0-2040-48d1-9ae9-02bf8c4d0efc")
         return {
           ...node,
           data: {
@@ -25,7 +25,7 @@ export const runExample = (useNodes, useEdges, setShowPopUp) => {
   setTimeout(() => {
     setNodes(
       nodes.map((node) => {
-        if (node.id == "cc8529b9-ad6c-4edb-9a14-c8236ca64abc")
+        if (node.id == "9a4d80e0-2040-48d1-9ae9-02bf8c4d0efc")
           return {
             ...node,
             data: {
@@ -33,7 +33,7 @@ export const runExample = (useNodes, useEdges, setShowPopUp) => {
               status: "done",
             },
           };
-        else if (node.id == "3bf501c9-32ab-4764-955e-98d6e4a7eaf8")
+        else if (node.id == "9052724d-5739-4ebf-a946-18c7852dfced")
           return {
             ...node,
             data: {
@@ -50,7 +50,7 @@ export const runExample = (useNodes, useEdges, setShowPopUp) => {
   setTimeout(() => {
     setNodes(
       nodes.map((node) => {
-        if (node.id == "cc8529b9-ad6c-4edb-9a14-c8236ca64abc")
+        if (node.id == "9a4d80e0-2040-48d1-9ae9-02bf8c4d0efc")
           return {
             ...node,
             data: {
@@ -58,7 +58,7 @@ export const runExample = (useNodes, useEdges, setShowPopUp) => {
               status: "done",
             },
           };
-        else if (node.id == "3bf501c9-32ab-4764-955e-98d6e4a7eaf8")
+        else if (node.id == "9052724d-5739-4ebf-a946-18c7852dfced")
           return {
             ...node,
             data: {
@@ -66,7 +66,7 @@ export const runExample = (useNodes, useEdges, setShowPopUp) => {
               status: "done",
             },
           };
-        else if (node.id == "06d9604d-97d7-402c-b1d0-6848522432f2")
+        else if (node.id == "da8e0fd8-f5fa-4381-b927-14ce9e0083d6")
           return {
             ...node,
             data: {
