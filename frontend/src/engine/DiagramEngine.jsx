@@ -106,8 +106,20 @@ const DiagramEngineFlow = () => {
   // *************** hook diagram data with side effect:
   const {
     useAppStatus: { appStatus, changeAppStatus },
-    usePopUp: { showPopUp, setShowPopUp },
+    usePopUp: { showPopUp, setShowPopUp, changePopupData },
   } = useContext(Context);
+
+  // options
+  const options = {
+    popup: (data) => {
+      changePopupData(data.title, data.data, data.type);
+      setShowPopUp(true);
+    },
+    alert: (data) => {
+      alert(data.title);
+    },
+  };
+
   // Apply changes with side effect
   useEffect(() => {
     switch (appStatus) {
@@ -118,7 +130,7 @@ const DiagramEngineFlow = () => {
         onRestore();
         break;
       case "run":
-        runDiagram(nodes, edges);
+        runDiagram(nodes, edges, options);
         break;
     }
     changeAppStatus("dev");

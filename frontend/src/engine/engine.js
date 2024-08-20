@@ -1,3 +1,8 @@
+import createConnection from "../socket/socket";
+
+const DEPLOY_API_ADDRESS = "localhost:5000";
+
+let engineSocket = null;
 /**
  * This function reduces object size of diagram data
  * before sending it to backend.
@@ -6,7 +11,7 @@
  * @param {Array} edges all edges at run time
  */
 const prepareData = (nodes = [], edges = []) => {
-  return {
+  return JSON.stringify({
     nodes: nodes.map((node) => {
       return {
         id: node.id,
@@ -22,7 +27,7 @@ const prepareData = (nodes = [], edges = []) => {
         target: edge.target,
       };
     }),
-  };
+  });
 };
 
 /**
@@ -33,6 +38,16 @@ const prepareData = (nodes = [], edges = []) => {
  */
 const deploy = (data = {}, options = {}) => {
   console.log(data);
+  // create connection if not exists or dead.
+  if (!engineSocket || engineSocket.readyState !== WebSocket.OPEN) {
+    engineSocket = createConnection(DEPLOY_API_ADDRESS);
+  }
+  if (engineSocket.readyState == WebSocket.OPEN) {
+    engineSocket.send(data);
+    console.log("ml-ops deployed");
+  } else {
+    console.log("cannot deploy ml-ops");
+  }
 };
 
 /**

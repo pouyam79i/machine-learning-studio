@@ -1,9 +1,9 @@
-import React, { useState } from "react";
-import irisResult from "../../public/iris_test.png";
+import React from "react";
 
 const PopUp = ({
   title = "This is Pop Up",
-  url = "",
+  data = "",
+  type = "",
   showPopUp = false,
   setShowPopUp,
 }) => {
@@ -17,7 +17,8 @@ const PopUp = ({
       style={{ display: showPopUp ? "flex" : "none" }}
     >
       <div className="container">
-        <img src={irisResult}></img>
+        {type === "url" && <img src={data}></img>}
+        {type === "base64" && <img src={"data:image/png;base64," + data}></img>}
         <div className="description">{title}</div>
       </div>
     </div>

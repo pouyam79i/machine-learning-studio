@@ -36,7 +36,8 @@ function App() {
   const [appStatus, setAppStatus] = useState("dev");
   const [popupData, setPopupData] = useState({
     title: "K-NN model on Iris",
-    url: "",
+    data: "", // could be a url or base64 encoded string
+    type: "base64", // set to 'base64' or 'url'.
   });
   const [showPopUp, setShowPopUp] = useState(false);
 
@@ -50,18 +51,27 @@ function App() {
     else setAppStatus(newAppStatus);
   };
 
+  const changePopupData = (title = "", data = "", type = "") => {
+    setPopupData({
+      title: title,
+      data: data,
+      type: type,
+    });
+  };
+
   return (
     <Context.Provider
       value={{
         useItem: { selectedItem, changeSelectedItem },
         useAppStatus: { appStatus, changeAppStatus },
-        usePopUp: { showPopUp, setShowPopUp },
+        usePopUp: { showPopUp, setShowPopUp, changePopupData },
       }}
     >
       {/* pop up */}
       <PopUp
         title={popupData.title}
-        url={popupData.url}
+        data={popupData.data}
+        type={popupData.type}
         showPopUp={showPopUp}
         setShowPopUp={setShowPopUp}
       ></PopUp>
