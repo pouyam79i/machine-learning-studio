@@ -19,6 +19,8 @@ def interpret():
  
     raw_data = request.get_data().decode('utf-8')
     
+    print(raw_data)
+    
     processing_thread = threading.Thread(target=process, args=(raw_data,))
     processing_thread.start()
     
@@ -26,4 +28,4 @@ def interpret():
     return jsonify({'message': 'successfully uploaded'})
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host='localhost', port='4000', debug=True)

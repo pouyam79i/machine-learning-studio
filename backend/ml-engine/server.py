@@ -14,7 +14,7 @@ def process(raw_data):
     #     print("Failed to interpret")
 
 @app.route('/exec', methods=['POST'])
-def interpret():
+def execute():
  
     raw_data = request.get_data().decode('utf-8')
     
@@ -25,4 +25,4 @@ def interpret():
     return jsonify({'message': 'code received successfully'})
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host='localhost', port='5000', debug=True)
