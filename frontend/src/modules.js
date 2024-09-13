@@ -133,26 +133,10 @@ const Modules = {
           ],
           items: null,
         },
-
         {
           id: 9,
           title: "Scatter Plot",
           tag: "scatter_plot",
-          props: [
-            {
-              id: 0,
-              title: "What is Scatter Plot?",
-              tag: "description",
-              type: "description",
-              href: "scatter-plot-des",
-            },
-          ],
-          items: null,
-        },
-        {
-          id: 10,
-          title: "New Plot",
-          tag: "new_plot",
           props: [
             {
               id: 0,
@@ -199,3 +183,21 @@ export const getDescriptions = (href) => {
 };
 
 export default Modules;
+
+// items = [
+//   //item 1 - this is an item
+//   {
+//     ...data,
+//     props: [prop1, prop2],
+//     items: null,
+//   },
+//   // item 2 - this is a menu
+//   {
+//     ...data,
+//     props: null,
+//     items: [sub_item1, sub_item2],
+//   },
+// ];
+
+
+

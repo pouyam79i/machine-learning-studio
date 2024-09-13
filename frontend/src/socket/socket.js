@@ -4,12 +4,16 @@
  * @param {*} options how to handle received msg data.
  * @returns socket
  */
-const createConnection = (address = "127.0.0.1:5000", options = {}) => {
+const createConnection = (address = "127.0.0.1:8080/run", options = {}) => {
   const socket = new WebSocket("ws://" + address);
 
   // on open connection
   socket.onopen = () => {
     console.log("Connected to the server");
+  };
+
+  socket.onerror = () => {
+    console.log("error in ws");
   };
 
   // on receiving msg
