@@ -6,13 +6,13 @@ app = Flask(__name__)
 
 def process(raw_data):
     interpreter = core()
-    # try:
-    data = json.loads(raw_data)
-    ready_code = interpreter(data)
-    print(ready_code)
-        # todo: send this code to ml engine
-    # except:
-    #     print("Failed to interpret")
+    try: 
+        data = json.loads(raw_data)
+        ready_code = interpreter(data)
+        print(ready_code)
+            # todo: send this code to ml engine
+    except:
+        print("failed to interpret!")
 
 @app.route('/interpret', methods=['POST'])
 def interpret():
