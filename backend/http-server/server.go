@@ -27,6 +27,13 @@ type FeedbackData struct {
 	Data     string `json:"data"`
 }
 
+// feed data
+type Feed struct {
+	Status int `json:"status"`
+	// Message string `json:"Message"`
+	Data string `json:"data"`
+}
+
 type InterpreterRequest struct {
 	UserHash string `json:"user_hash"`
 	Data     string `json:"data"`
@@ -70,9 +77,43 @@ func main() {
 	e.Logger.Fatal(e.Start(":8080"))
 }
 
-// TODO: complete feedback function
+// complete feedback function
 func feedback(c echo.Context) error {
-	fmt.Println("some context in feedback")
+
+	received_feedback := new(FeedbackData)
+	if err := c.Bind(received_feedback); err != nil {
+		fmt.Println("failed to read feedback: ", err.Error())
+		return err
+	}
+
+	fmt.Println("feedback for user: ", received_feedback.UserHash)
+
+	// get connection
+	client, ok := ConnectedUsers[received_feedback.UserHash]
+	if !ok {
+		fmt.Println("feedback received but no connection is found. user: ", received_feedback.UserHash)
+		res := &Res{
+			Status:  503,
+			Message: "feedback received but no connection is found!",
+		}
+		return c.JSON(http.StatusOK, res)
+	}
+
+	// feed user with received data
+	user_feed := &Feed{
+		Status: 200,
+		Data:   received_feedback.Data,
+	}
+
+	if err := client.Connection.WriteJSON(user_feed); err != nil {
+		fmt.Println("failed to inform user: ", received_feedback.UserHash)
+		res := &Res{
+			Status:  503,
+			Message: "failed to inform user.",
+		}
+		return c.JSON(http.StatusOK, res)
+	}
+
 	res := &Res{
 		Status:  http.StatusOK,
 		Message: "feedback received!",
@@ -80,7 +121,7 @@ func feedback(c echo.Context) error {
 	return c.JSON(http.StatusOK, res)
 }
 
-// TODO: upload raw data to interpreter!
+// upload raw data to interpreter!
 func callInterpreter(conn *websocket.Conn, userData string, userHash string) {
 	fmt.Println("calling interpreter...")
 	// prepare data

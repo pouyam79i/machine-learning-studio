@@ -10,7 +10,8 @@ def process(raw_data):
         data = json.loads(raw_data)
         ready_code = interpreter(data)
         print(ready_code)
-            # todo: send this code to ml engine
+        # TODO: inform server code is created
+        # TODO: send the ready code to ml engine
     except:
         print("failed to interpret!")
 
