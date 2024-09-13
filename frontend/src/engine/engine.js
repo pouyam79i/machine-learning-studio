@@ -48,7 +48,7 @@ const prepareData = (nodes = [], edges = []) => {
  * @param {Object} options additional frontend options. like popups
  */
 const deploy = (data = {}, options = {}, attempt = 0) => {
-  if (engineSocket == null) {
+  if (engineSocket == null || engineSocket.readyState != WebSocket.OPEN) {
     engineSocket = createConnection(DEPLOY_API_ADDRESS, options);
   }
   if (engineSocket.readyState == WebSocket.OPEN) {

@@ -1,6 +1,8 @@
 package main
 
 import (
+	"bytes"
+	"encoding/json"
 	"fmt"
 	"net/http"
 
@@ -9,6 +11,8 @@ import (
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
 )
+
+const INTERPRETER_ADDR = "http://localhost:4000/interpret"
 
 // client data structure
 type Client struct {
@@ -78,23 +82,57 @@ func feedback(c echo.Context) error {
 
 // TODO: upload raw data to interpreter!
 func callInterpreter(conn *websocket.Conn, userData string, userHash string) {
+	fmt.Println("calling interpreter...")
+	// prepare data
 	reqData := &InterpreterRequest{
 		UserHash: userHash,
 		Data:     userData,
 	}
-	fmt.Println(reqData.UserHash)
-	fmt.Println("calling interpreter...")
+	jsonData, err := json.Marshal(reqData)
+	if err != nil {
+		fmt.Println("failed to marshal json data")
+		return
+	}
 
-	// TODO: call interpreter and return result
+	// create req for interpreter
+	req, err := http.NewRequest(http.MethodPost, INTERPRETER_ADDR, bytes.NewBuffer(jsonData))
+	if err != nil {
+		res := &Res{
+			Status:  503,
+			Message: "cannot create request for client!",
+		}
+		if err := conn.WriteJSON(res); err != nil {
+			fmt.Println("failed to inform user: ", userHash)
+			return
+		}
+		return
+	}
+	req.Header.Set("Content-Type", "application/json")
+
+	// call interpreter
+	client := &http.Client{}
+	client_res, err := client.Do(req)
+	if err != nil {
+		res := &Res{
+			Status:  503,
+			Message: "failed to reach interpreter!",
+		}
+		if err := conn.WriteJSON(res); err != nil {
+			fmt.Println("failed to inform user: ", userHash)
+		}
+		return
+	}
+	defer client_res.Body.Close()
 
 	res := &Res{
-		Status:  http.StatusOK,
-		Message: "interpreter received diagram data...",
+		Status:  200,
+		Message: "interpreter is processing data",
 	}
-
 	if err := conn.WriteJSON(res); err != nil {
 		fmt.Println("failed to inform user: ", userHash)
+		return
 	}
+	fmt.Println("interpreter called")
 }
 
 // handles websocket connection
