@@ -33,7 +33,7 @@ const ToolItem = ({ item = null, url = "/" }) => {
       type: "SimpleNode",
       data: {
         title: item.title,
-        tag: item.tag,
+        tag: url,
         post: getNodePostByUrl(url),
         props: item.props,
       },
