@@ -22,7 +22,7 @@ const createConnection = (address = "127.0.0.1:8080/run", options = {}) => {
     console.log(data);
     // passing data to options
     if (data.type && options[data.type]) {
-      options[data.type](data);
+      options[data.type](data.data);
     }
   };
 

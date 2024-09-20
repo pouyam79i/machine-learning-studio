@@ -1,6 +1,16 @@
 import threading, json
+import requests
 from core import core
 from flask import Flask, jsonify, request
+
+FEEDBACK_SERVER = 'http://localhost:8080/feedback'
+
+def feedback(json_data={}):
+    try:
+        r = requests.post(FEEDBACK_SERVER, json=json_data)
+        print('feedback res: ', r.status_code)
+    except:
+        print('feedback failed!')
 
 app = Flask(__name__)
 
@@ -14,6 +24,15 @@ def process(raw_data):
         # TODO: send the ready code to ml engine
     except:
         print("failed to interpret!")
+        feedback({
+            'status':400,
+            'user_hash': data['user_hash'],
+            'data': {
+                'type':'status',
+                'data':'failed to analyse diagram data.'
+            }
+        })
+
 
 @app.route('/interpret', methods=['POST'])
 def interpret():

@@ -113,15 +113,16 @@ const DiagramEngineFlow = () => {
   // options
   const options = {
     popup: (data) => {
-      changePopupData(data.title, data.data, data.type);
+      d = JSON.parse(data);
+      changePopupData(d.title, d.data, d.type);
       setShowPopUp(true);
     },
     alert: (data) => {
-      alert(data.title);
+      alert(data);
     },
     status: (data) => {
-      setEngineStatus(data.message)
-    }
+      setEngineStatus(data);
+    },
   };
 
   // Apply changes with side effect
