@@ -2,6 +2,8 @@
 import json
 import requests
 
+FEEDBACK_SERVER = 'http://localhost:8080/feedback'
+
 # data transfer dict
 # set: target_hash <- data
 # get: source_hash -> data
