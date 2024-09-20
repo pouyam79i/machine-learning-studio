@@ -120,7 +120,7 @@ const NavBar = () => {
           className="status"
           style={{ color: getEngineStatusColor(engineStatus) }}
         >
-          {engineStatus}
+          {engineStatus.toLowerCase()}
         </div>
       </div>
     </div>

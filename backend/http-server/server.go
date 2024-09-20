@@ -42,6 +42,7 @@ type InterpreterRequest struct {
 // general response structure
 type Res struct {
 	Status  int    `json:"status"`
+	Type    string `json:"type"`
 	Message string `json:"message"`
 }
 
@@ -94,6 +95,7 @@ func feedback(c echo.Context) error {
 		fmt.Println("feedback received but no connection is found. user: ", received_feedback.UserHash)
 		res := &Res{
 			Status:  503,
+			Type:    "status",
 			Message: "feedback received but no connection is found!",
 		}
 		return c.JSON(http.StatusOK, res)
@@ -109,6 +111,7 @@ func feedback(c echo.Context) error {
 		fmt.Println("failed to inform user: ", received_feedback.UserHash)
 		res := &Res{
 			Status:  503,
+			Type:    "status",
 			Message: "failed to inform user.",
 		}
 		return c.JSON(http.StatusOK, res)
@@ -116,6 +119,7 @@ func feedback(c echo.Context) error {
 
 	res := &Res{
 		Status:  http.StatusOK,
+		Type:    "status",
 		Message: "feedback received!",
 	}
 	return c.JSON(http.StatusOK, res)
@@ -140,6 +144,7 @@ func callInterpreter(conn *websocket.Conn, userData string, userHash string) {
 	if err != nil {
 		res := &Res{
 			Status:  503,
+			Type:    "status",
 			Message: "cannot create request for client!",
 		}
 		if err := conn.WriteJSON(res); err != nil {
@@ -156,6 +161,7 @@ func callInterpreter(conn *websocket.Conn, userData string, userHash string) {
 	if err != nil {
 		res := &Res{
 			Status:  503,
+			Type:    "status",
 			Message: "failed to reach interpreter!",
 		}
 		if err := conn.WriteJSON(res); err != nil {
@@ -167,6 +173,7 @@ func callInterpreter(conn *websocket.Conn, userData string, userHash string) {
 
 	res := &Res{
 		Status:  200,
+		Type:    "status",
 		Message: "interpreter is processing data",
 	}
 	if err := conn.WriteJSON(res); err != nil {
@@ -210,7 +217,8 @@ func handleWebSocket(c echo.Context) error {
 
 		res := &Res{
 			Status:  http.StatusOK,
-			Message: "we are processing your data...",
+			Type:    "status",
+			Message: "processing data...",
 		}
 
 		if err := conn.WriteJSON(res); err != nil {

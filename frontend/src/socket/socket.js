@@ -18,16 +18,18 @@ const createConnection = (address = "127.0.0.1:8080/run", options = {}) => {
 
   // on receiving msg
   socket.onmessage = (event) => {
-    console.log(event.data);
+    const data = JSON.parse(event.data);
+    console.log(data);
     // passing data to options
-    if (event.data.type && options[event.data.type]) {
-      options[event.data.type](event.data.data);
+    if (data.type && options[data.type]) {
+      options[data.type](data);
     }
   };
 
   // on close connection
   socket.onclose = () => {
     console.log("Disconnected from the server");
+    if (options["status"]) options["status"]({ message: "Disconnected" });
   };
 
   return socket;
