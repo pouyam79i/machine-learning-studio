@@ -56,6 +56,7 @@ const deploy = (data = {}, options = {}, attempt = 0) => {
   }
   if (engineSocket.readyState == WebSocket.OPEN) {
     engineSocket.send(data);
+    setEngineStatus("Data is sent.");
   } else if (attempt < 10) {
     setTimeout(() => {
       console.log("trying to send...");

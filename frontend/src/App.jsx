@@ -79,6 +79,7 @@ function App() {
       ></PopUp>
       {/* app */}
       <Grid
+        style={{ height: "100%" }}
         templateAreas={`"nav nav nav" "tools main props"`}
         templateColumns="250px 1fr 250px"
         templateRows="80px 1fr"
