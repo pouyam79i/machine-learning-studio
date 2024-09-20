@@ -77,7 +77,7 @@ const Modules = {
     {
       id: 4,
       title: "ML Algorithms",
-      tag: "ml_algorithms",
+      tag: "ml",
       props: null,
       items: [
         {
