@@ -8,16 +8,17 @@ const NavBar = () => {
   } = useContext(Context);
 
   const getEngineStatusColor = (status = "") => {
-    if (status.startsWith("Disconnected")) {
+    status = status.toLowerCase();
+    if (status.startsWith("disconnected")) {
       return "var(--inactive-color)";
     } else if (
-      status.startsWith("Connecting") ||
-      status.startsWith("Preparing")
+      status.startsWith("connecting") ||
+      status.startsWith("preparing")
     ) {
       return "var(--trying-color)";
-    } else if (status.startsWith("Failed")) {
+    } else if (status.startsWith("failed")) {
       return "var(--error-color)";
-    } else if (status.startsWith("Warning")) {
+    } else if (status.startsWith("warning")) {
       return "var(--warning-color)";
     } else {
       return "var(--active-color)";
