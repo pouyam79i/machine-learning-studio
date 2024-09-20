@@ -13,7 +13,12 @@ const PropsPanel = () => {
     return (
       <div className="props-panel">
         <div className="header">Properties</div>
-        <div className="body">no item is selected!</div>
+        <div className="body">
+          <div className="props-description">
+            <div className="head">{"No item is selected!"}</div>
+            <div className="description">{""}</div>
+          </div>
+        </div>
       </div>
     );
 

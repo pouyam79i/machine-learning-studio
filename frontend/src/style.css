@@ -8,7 +8,7 @@
   --border-color: #202022;
   --nav-background: #373a4b;
   --side-background: #44475a;
-  --btn-active-hover: #424649;
+  --btn-active-hover: #8b8b8b93;
   --selected-background: #bd93f9;
   --app-title-color: #bd93f9;
   --description-background-color: rgba(0, 0, 0, 0.103);
@@ -89,7 +89,7 @@ body {
 }
 
 .nav-bar .options button {
-  background-color: #6161613a;
+  background-color: var(--app-title-color);
   margin: 0px 4px;
   width: 100px;
   height: 25px;
@@ -99,6 +99,11 @@ body {
   align-items: center;
   justify-content: space-between;
   padding: 1px 8px;
+  transition: all 150ms ease-in-out;
+}
+
+.nav-bar .options button:hover {
+  background-color: var(--inactive-color);
 }
 
 /* Main Panel */
@@ -131,6 +136,10 @@ body {
   justify-content: space-between;
   border: none;
   /* border-radius: 0px; */
+}
+
+.tool-item button:hover {
+  background-color: var(--btn-active-hover);
 }
 
 /* Props Panel */
