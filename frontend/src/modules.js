@@ -57,8 +57,8 @@ const Modules = {
           items: [
             {
               id: 3,
-              title: "Iris Dataset",
-              tag: "iris",
+              title: "Iris Dataset 2D",
+              tag: "iris_2d",
               props: [
                 {
                   id: 0,
@@ -102,6 +102,12 @@ const Modules = {
           props: [
             {
               id: 0,
+              title: "Number of neighbors...",
+              tag: "neighbors",
+              type: "text-field",
+            },
+            {
+              id: 1,
               title: "Learn more about k-nn",
               tag: "description",
               type: "description",
@@ -198,6 +204,3 @@ export default Modules;
 //     items: [sub_item1, sub_item2],
 //   },
 // ];
-
-
-

@@ -67,7 +67,7 @@ func main() {
 	e := echo.New()
 
 	// middleware
-	e.Use(middleware.Logger())
+	// e.Use(middleware.Logger())
 	e.Use(middleware.Recover())
 
 	// application page
