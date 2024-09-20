@@ -20,7 +20,14 @@ def process(raw_data):
         data = json.loads(raw_data)
         ready_code = interpreter(data)
         print(ready_code)
-        # TODO: inform server code is created
+        feedback({
+            'status':200,
+            'user_hash': data['user_hash'],
+            'data': {
+                'type':'status',
+                'data':'sending code for execution...'
+            }
+        })
         # TODO: send the ready code to ml engine
     except:
         print("failed to interpret!")
@@ -32,7 +39,6 @@ def process(raw_data):
                 'data':'failed to analyse diagram data.'
             }
         })
-
 
 @app.route('/interpret', methods=['POST'])
 def interpret():
