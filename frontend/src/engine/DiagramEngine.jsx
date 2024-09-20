@@ -107,6 +107,7 @@ const DiagramEngineFlow = () => {
   const {
     useAppStatus: { appStatus, changeAppStatus },
     usePopUp: { showPopUp, setShowPopUp, changePopupData },
+    useEngineStatus: { engineStatus, setEngineStatus },
   } = useContext(Context);
 
   // options
@@ -118,6 +119,9 @@ const DiagramEngineFlow = () => {
     alert: (data) => {
       alert(data.title);
     },
+    status: (data) => {
+      setEngineStatus(data.message)
+    }
   };
 
   // Apply changes with side effect
@@ -130,7 +134,7 @@ const DiagramEngineFlow = () => {
         onRestore();
         break;
       case "run":
-        runDiagram(nodes, edges, options);
+        runDiagram(nodes, edges, options, setEngineStatus);
         break;
     }
     changeAppStatus("dev");

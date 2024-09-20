@@ -13,6 +13,13 @@
   --app-title-color: #bd93f9;
   --description-background-color: rgba(0, 0, 0, 0.103);
   --text-field-background-color: #bd93f9;
+
+  /* status colors */
+  --error-color: #ff79c6;
+  --warning-color: #ffb86c;
+  --trying-color: #bd93f9;
+  --inactive-color: #6272a4;
+  --active-color: #50fa7b;
 }
 
 * {
@@ -45,24 +52,41 @@ body {
   padding: 2px 8px;
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
-  /* background-color: #bd93f9; */
+  border-bottom: 1px solid var(--border-color);
+  background-color: var(--background-color);
 }
 
 .nav-bar .header .title {
   font-weight: bold;
+  font-size: 30px;
   color: var(--app-title-color);
 }
 
-.nav-bar .options {
+.nav-bar .body {
   width: 100%;
   height: 50%;
   padding: 2px 8px;
   display: flex;
   flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.nav-bar .body .options {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
   /* align-items: center; */
   justify-content: flex-start;
+}
+
+.nav-bar .body .status {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
 }
 
 .nav-bar .options button {

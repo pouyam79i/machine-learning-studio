@@ -34,6 +34,7 @@ export const Context = createContext();
 function App() {
   const [selectedItem, setSelectedItem] = useState();
   const [appStatus, setAppStatus] = useState("dev");
+  const [engineStatus, setEngineStatus] = useState("Disconnected");
   const [popupData, setPopupData] = useState({
     title: "K-NN model on Iris",
     data: "", // could be a url or base64 encoded string
@@ -65,6 +66,7 @@ function App() {
         useItem: { selectedItem, changeSelectedItem },
         useAppStatus: { appStatus, changeAppStatus },
         usePopUp: { showPopUp, setShowPopUp, changePopupData },
+        useEngineStatus: { engineStatus, setEngineStatus },
       }}
     >
       {/* pop up */}
@@ -79,7 +81,7 @@ function App() {
       <Grid
         templateAreas={`"nav nav nav" "tools main props"`}
         templateColumns="250px 1fr 250px"
-        templateRows="60px 1fr"
+        templateRows="80px 1fr"
       >
         <GridItem area="nav">
           <NavBar />

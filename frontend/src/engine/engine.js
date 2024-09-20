@@ -3,6 +3,8 @@ import createConnection from "../socket/socket";
 const DEPLOY_API_ADDRESS = "localhost:8080/run";
 
 let engineSocket = null;
+let setEngineStatus = (message) => {};
+
 /**
  * This function reduces object size of diagram data
  * before sending it to backend.
@@ -48,6 +50,7 @@ const prepareData = (nodes = [], edges = []) => {
  * @param {Object} options additional frontend options. like popups
  */
 const deploy = (data = {}, options = {}, attempt = 0) => {
+  setEngineStatus("Connecting...");
   if (engineSocket == null || engineSocket.readyState != WebSocket.OPEN) {
     engineSocket = createConnection(DEPLOY_API_ADDRESS, options);
   }
@@ -56,9 +59,10 @@ const deploy = (data = {}, options = {}, attempt = 0) => {
   } else if (attempt < 10) {
     setTimeout(() => {
       console.log("trying to send...");
-      deploy(data, options, attempt + 1);
+      deploy(data, options, (attempt = attempt + 1));
     }, 1000);
   } else {
+    setEngineStatus("Failed to connect!");
     console.log("send failed!");
   }
 };
@@ -68,7 +72,15 @@ const deploy = (data = {}, options = {}, attempt = 0) => {
  * @param {Array} nodes all nodes at run time
  * @param {Array} edges all edges at run time
  */
-export const runDiagram = (nodes, edges, options = {}) => {
-  let data = prepareData(nodes, edges, options);
-  deploy(data);
+export const runDiagram = (
+  nodes,
+  edges,
+  options = {},
+  setEngineStatusMessage = (message) => {}
+) => {
+  setEngineStatus = setEngineStatusMessage;
+  setEngineStatus("Preparing data...");
+  let data = prepareData(nodes, edges);
+  setEngineStatus("Preparing data is done.");
+  deploy(data, options);
 };
