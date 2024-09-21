@@ -82,7 +82,7 @@ class core():
             all_code = all_code + func + '\n'
             
         
-        with open("Output.py", "w") as text_file:
+        with open("./out/Output.py", "w") as text_file:
             text_file.write(all_code)
             
         return all_code
