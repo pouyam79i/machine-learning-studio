@@ -5,6 +5,7 @@
   --text-color: white;
   --text-color-placeholder: rgb(228, 228, 228);
   --background-color: #282a36;
+  --popup-background-color: #21232c;
   --border-color: #202022;
   --nav-background: #373a4b;
   --side-background: #44475a;
@@ -236,7 +237,7 @@ body {
 .pop-up .container {
   width: 700px;
   height: 600px;
-  background-color: var(--background-color);
+  background-color: var(--popup-background-color);
   display: flex;
   flex-direction: column;
   align-items: center;

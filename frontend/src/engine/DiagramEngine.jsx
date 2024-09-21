@@ -113,8 +113,8 @@ const DiagramEngineFlow = () => {
   // options
   const options = {
     popup: (data) => {
-      d = JSON.parse(data);
-      changePopupData(d.title, d.data, d.type);
+      data = JSON.parse(data);
+      changePopupData(data["title"], data["data"], data["type"]);
       setShowPopUp(true);
     },
     alert: (data) => {
