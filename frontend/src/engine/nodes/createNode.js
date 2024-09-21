@@ -1,9 +1,9 @@
 import { background, position } from "@chakra-ui/react";
 import { v4 as uuid } from "uuid";
 
-const NODE_SOURCE_URLs = ["import"];
+const NODE_SOURCE_URL = "import";
 
-const NODE_TARGET_URLs = ["charts"];
+const NODE_TARGET_URL = "charts";
 
 // ******************************    node builders. TODO add a factory method for builders
 /**
@@ -59,25 +59,25 @@ export const nodeFactory = (
  * @returns
  */
 export const getNodePostByUrl = (url = "/") => {
-  let node_base_url = url.trim().split("/");
+  // let node_base_url = url.trim().split("/");
 
-  if (node_base_url.length < 1) {
-    console.log("no type for: " + url);
-    return "no-type";
-  }
+  // if (node_base_url.length < 1) {
+  //   console.log("no type for: " + url);
+  //   return "no-type";
+  // }
 
-  let pointer = node_base_url.indexOf("tools");
+  // let pointer = node_base_url.indexOf("tools");
 
-  if (pointer == node_base_url.length - 1) {
-    console.log("general type for: " + url);
-    return "tools";
-  }
+  // if (pointer == node_base_url.length - 1) {
+  //   console.log("general type for: " + url);
+  //   return "tools";
+  // }
 
-  node_base_url = node_base_url[pointer + 1];
-  if (NODE_SOURCE_URLs.indexOf(node_base_url) !== -1) {
+  // node_base_url = node_base_url[pointer + 1];
+  if (url.indexOf(NODE_SOURCE_URL) !== -1) {
     return "source";
   }
-  if (NODE_TARGET_URLs.indexOf(node_base_url) !== -1) {
+  if (url.indexOf(NODE_TARGET_URL) !== -1) {
     return "target";
   }
   return "inner";

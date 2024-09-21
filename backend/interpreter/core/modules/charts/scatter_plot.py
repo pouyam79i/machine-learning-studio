@@ -4,7 +4,7 @@ from io import BytesIO
 
 
 def scatter_plot(node_hash:str=NODE_HASH, source_hash:str=SOURCE_HASH, target_hash:str=TARGET_HASH):
-    xx, yy, Z = transfer[source_hash]
+    xx, yy, Z = getTransfer(source_hash)
     send_status('generating plot on given model')
     
     plt.contourf(xx, yy, Z, alpha=0.3)
@@ -25,5 +25,4 @@ def scatter_plot(node_hash:str=NODE_HASH, source_hash:str=SOURCE_HASH, target_ha
 
     send_status('done generating plot.')
     send_popup(data={'data':img_str, 'title':'Decision Boundary', 'type':'base64'})
-
 

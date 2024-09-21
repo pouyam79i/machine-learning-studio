@@ -43,3 +43,15 @@ def send_status(data, user_hash=USER_HASH):
             }
         })
 
+# set data in transfer
+def setTransfer(hash, data):
+    if hash == None or hash == '':
+        raise Exception('Method: Set(), Cannot Transfer Data')
+    transfer[hash] = data
+    
+# get data from transfer
+def getTransfer(hash):
+    if hash == None or hash == '':
+        raise Exception('Method: Get(), Cannot Transfer Data')
+    return transfer[hash]
+

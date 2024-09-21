@@ -82,7 +82,6 @@ export const runDiagram = (
   setEngineStatus = setEngineStatusMessage;
   setEngineStatus("Preparing data...");
   let data = prepareData(nodes, edges);
-  console.log(data);
   setEngineStatus("Preparing data is done.");
   deploy(data, options);
 };

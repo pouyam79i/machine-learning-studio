@@ -2,10 +2,9 @@ import numpy as np
 from sklearn.neighbors import KNeighborsClassifier
 
 def knn(node_hash:str=NODE_HASH, source_hash:str=SOURCE_HASH, target_hash:str=TARGET_HASH):
-
-    k = int(props[node_hash][0]['data'])
-    X, _, X_train, _, y_train, _ = transfer[source_hash]
     send_status('training dataset with K-NN...')
+    k = int(props[node_hash][0]['data'])
+    X, _, X_train, _, y_train, _ = getTransfer(source_hash)
 
     # Train the KNN model
     knn = KNeighborsClassifier(n_neighbors=k)
@@ -20,6 +19,5 @@ def knn(node_hash:str=NODE_HASH, source_hash:str=SOURCE_HASH, target_hash:str=TA
     Z = Z.reshape(xx.shape)
     
     send_status('done training with KNN.')
-    transfer[target_hash] = [xx, yy, Z]
+    setTransfer(target_hash, [xx, yy, Z])
     
-
