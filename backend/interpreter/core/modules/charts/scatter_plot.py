@@ -24,6 +24,6 @@ def scatter_plot(node_hash:str=NODE_HASH, source_hash:str=SOURCE_HASH, target_ha
     buf.close()
 
     send_status('done generating plot.')
-    send_plot(data=img_str)
+    send_popup(data={'data':img_str, 'title':'Decision Boundary', 'type':'base64'})
 
 

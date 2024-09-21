@@ -18,11 +18,7 @@ def process(raw_data):
     interpreter = core()
     try: 
         data = json.loads(raw_data)
-        print('Given Data:')
-        print(data)
         ready_code = interpreter(data)
-        print('Ready Code:')
-        print(ready_code)
         feedback({
             'status':200,
             'user_hash': data['user_hash'],

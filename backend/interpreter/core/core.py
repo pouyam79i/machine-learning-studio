@@ -1,74 +1,98 @@
-from typing import Dict, List
-import heapq
 import os
+import json
 
 BASE_ADDR = "./core/modules/"
 
 class core():
-
-    # use to get import component code
-    def selector_import(self, type:str) -> str:
-        print("import got:"+ type )
-        module = {
-            'csv':'import-csv.py'
-        }
-        f = open(BASE_ADDR+"import/"+module[type], "r")
-        return f.read()
+    def __init__(self) -> None:
+        pass
         
-    # use to get machine learning component code
-    def selector_ml(self, type:str) -> str:
-        print("ml got:"+ type )
-        module = {
-            'lin-reg':'lin-reg.py'
-        }
-        f = open(BASE_ADDR+"ml/"+module[type], "r")
+    # import code
+    def import_code(self, addr):
+        addr = BASE_ADDR + addr + '.py'
+        print("importing: ", addr)
+        f = open(addr, "r")
         return f.read()
-
-    # use to get display component code
-    def selector_display(self, type:str) -> str:
-        print("display got:"+ type )
-        module = {
-            'dot-line':'dot-line.py'
-        }
-        f = open(BASE_ADDR+"display/"+module[type], "r")
-        return f.read()
-
+             
     # build a file
-    def simple_build(self, components:List[Dict[str, str]]):
+    def simple_build(self, input:dict):
         
-        heap = []
-        heapq.heapify(heap)
-        priority = 0
+        functions = {
+            'source': [],
+            'inner': [],
+            'target': [],
+        }
+        props = dict()
         
-        for item in components:
-            print(item)
-            code = ''
-            type = item['type']
-            if type.startswith('import'):
-                priority = 0
-                code = self.selector_import(type.removeprefix('import-'))
-            elif type.startswith('ml'):
-                priority = 1
-                code = self.selector_ml(type.removeprefix('ml-'))
-            elif type.startswith('display'):
-                priority = 2 
-                code = self.selector_display(type.removeprefix('display-'))
-            heapq.heappush(heap, (priority, code))
-                
-        output = ''
-        while len(heap) > 0:
-            _, code = heapq.heappop(heap)
-            output += code + '\n'
+        user_hash = input['user_hash']
+        data = input['data']
+        data = json.loads(data)
+        nodes = data['nodes']
+        edges = data['edges']
+
+        all_code = ''
+
+        # import base code
+        base_code = self.import_code('code_base')
+        base_code = base_code.replace('USER_HASH', "\'" + user_hash + "\'")
         
-        return output
+        body_code = ''
+        for node in nodes:
             
+            # find node order
+            node_code = node['tag'].split('/')
+            if node_code[1] == 'import':
+                functions['source'].append(node_code[-1] + "()")
+            elif node_code[1] == 'ml':
+                functions['inner'].append(node_code[-1] + "()")            
+            elif node_code[1] == 'charts':
+                functions['target'].append(node_code[-1] + "()")
+                
+            # set node props
+            props[node['id']] = node['props'] 
+            
+            # import base code
+            code = '\n' + self.import_code(node['tag']) + '\n'
+            
+            # set hashes
+            code = code.replace('NODE_HASH', "\'" + node['id'] + "\'")
+            source = ''
+            target = ''
+            for edge in edges:
+                # this only works for one edge in between 2 nodes
+                if edge['source'] == node['id']:
+                    source = node['id']
+                if edge['target'] == node['id']:
+                    target = edge['source']
+            code = code.replace('SOURCE_HASH', "\'" + source + "\'")
+            code = code.replace('TARGET_HASH', "\'" + target + "\'")          
+            body_code = body_code + code
+            
+            
+        props_str = json.dumps(props)
+        props_data = 'props = json.loads(\'' + props_str + '\')'
+            
+        all_code = base_code + '\n\n' + props_data + body_code + '\n\n'
+        
+        for func in functions['source']:
+            all_code = all_code + func + '\n'
+        for func in functions['inner']:
+            all_code = all_code + func + '\n'
+        for func in functions['target']:
+            all_code = all_code + func + '\n'
+            
+        
+        with open("Output.py", "w") as text_file:
+            text_file.write(all_code)
+            
+        return all_code
 
     # returns useable code after analyzing the user request
     def run(self, input:dict)->str:
-        if input['type'] == 'simple-build':
-            return self.simple_build(input['components'])
-        
-        return ''
+        try:
+            return self.simple_build(input)
+        except:
+            return ''
 
     # another way to call run
     def __call__(self, input:dict):

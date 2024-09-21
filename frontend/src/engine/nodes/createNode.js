@@ -14,7 +14,7 @@ const NODE_TARGET_URLs = ["charts"];
  */
 export const createSimpleNode = (
   position = { x: 0, y: 0 },
-  data = { title: "", tag: "", post: "inner", props: {} }
+  data = { title: "", tag: "", post: "inner", props: [] }
 ) => {
   const id = uuid();
   const newNode = {
@@ -45,7 +45,7 @@ export const createSimpleNode = (
 export const nodeFactory = (
   type = "SimpleNode",
   position = { x: 0, y: 0 },
-  data = { title: "", tag: "", post: "" }
+  data = { title: "", tag: "", post: "", props: [] }
 ) => {
   if (type === "SimpleNode") {
     return createSimpleNode(position, data);

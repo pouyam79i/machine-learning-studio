@@ -21,6 +21,18 @@ const PropsPanel = () => {
         </div>
       </div>
     );
+  else if (!selectedItem.props)
+    return (
+      <div className="props-panel">
+        <div className="header">Properties</div>
+        <div className="body">
+          <div className="props-description">
+            <div className="head">{"Empty property!"}</div>
+            <div className="description">{""}</div>
+          </div>
+        </div>
+      </div>
+    );
 
   return (
     <div className="props-panel">

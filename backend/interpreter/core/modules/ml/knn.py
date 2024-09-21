@@ -3,7 +3,7 @@ from sklearn.neighbors import KNeighborsClassifier
 
 def knn(node_hash:str=NODE_HASH, source_hash:str=SOURCE_HASH, target_hash:str=TARGET_HASH):
 
-    k = props[node_hash][0].data
+    k = int(props[node_hash][0]['data'])
     X, _, X_train, _, y_train, _ = transfer[source_hash]
     send_status('training dataset with K-NN...')
 
