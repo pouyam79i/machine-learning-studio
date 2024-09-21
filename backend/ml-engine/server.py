@@ -6,12 +6,12 @@ app = Flask(__name__)
 
 def process(raw_data):
     ml_engine = core()
-    # try:
-    data = json.loads(raw_data)
-    ml_engine(data)    
-        # todo: send this code to ml engine
-    # except:
-    #     print("Failed to interpret")
+    try:
+        data = json.loads(raw_data)
+        print('executing for user: ', data['user_hash'])
+        ml_engine(data['code'])    
+    except:
+        print("failed to execute")
 
 @app.route('/exec', methods=['POST'])
 def execute():

@@ -10,7 +10,6 @@ class core():
     # import code
     def import_code(self, addr):
         addr = BASE_ADDR + addr + '.py'
-        print("importing: ", addr)
         f = open(addr, "r")
         return f.read()
              
@@ -81,10 +80,6 @@ class core():
         for func in functions['target']:
             all_code = all_code + func + '\n'
             
-        
-        with open("./out/Output.py", "w") as text_file:
-            text_file.write(all_code)
-            
         return all_code
 
     # returns useable code after analyzing the user request
@@ -97,5 +92,4 @@ class core():
     # another way to call run
     def __call__(self, input:dict):
         cwd = os.getcwd()
-        print(cwd)
         return self.run(input)
