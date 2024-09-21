@@ -22,5 +22,4 @@ def knn(node_hash:str=NODE_HASH, source_hash:str=SOURCE_HASH, target_hash:str=TA
     send_status('done training with KNN.')
     transfer[target_hash] = [xx, yy, Z]
     
-knn()
 

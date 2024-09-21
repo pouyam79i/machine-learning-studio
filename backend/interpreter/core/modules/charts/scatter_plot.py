@@ -26,5 +26,4 @@ def scatter_plot(node_hash:str=NODE_HASH, source_hash:str=SOURCE_HASH, target_ha
     send_status('done generating plot.')
     send_plot(data=img_str)
 
-scatter_plot()
 

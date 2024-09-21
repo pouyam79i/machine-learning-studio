@@ -18,7 +18,10 @@ def process(raw_data):
     interpreter = core()
     try: 
         data = json.loads(raw_data)
+        print('Given Data:')
+        print(data)
         ready_code = interpreter(data)
+        print('Ready Code:')
         print(ready_code)
         feedback({
             'status':200,
@@ -42,10 +45,7 @@ def process(raw_data):
 
 @app.route('/interpret', methods=['POST'])
 def interpret():
- 
     raw_data = request.get_data().decode('utf-8')
-    
-    print(raw_data)
     
     processing_thread = threading.Thread(target=process, args=(raw_data,))
     processing_thread.start()

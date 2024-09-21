@@ -3,7 +3,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LinearRegression
 from sklearn.metrics import mean_squared_error
 
-def func_ml(raw_data ,features:List[str]=None , targets:List[str]=None):
+def linear_regression(raw_data ,features:List[str]=None , targets:List[str]=None):
     # prepare the data
     if features != None:
         X = raw_data[features] 
@@ -20,3 +20,4 @@ def func_ml(raw_data ,features:List[str]=None , targets:List[str]=None):
     
     y_pred = model.predict(X_test)
     return y_test, y_pred
+

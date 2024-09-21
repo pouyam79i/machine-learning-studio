@@ -1,7 +1,7 @@
 from sklearn import datasets
 from sklearn.model_selection import train_test_split
 
-def load_iris_dataset_2d(node_hash:str=NODE_HASH, source_hash:str=SOURCE_HASH, target_hash:str=TARGET_HASH):
+def iris_2d(node_hash:str=NODE_HASH, source_hash:str=SOURCE_HASH, target_hash:str=TARGET_HASH):
     send_status('loading iris dataset...')
     
     iris = datasets.load_iris()
@@ -15,5 +15,4 @@ def load_iris_dataset_2d(node_hash:str=NODE_HASH, source_hash:str=SOURCE_HASH, t
     transfer[target_hash] = [X, y, X_train, X_test, y_train, y_test]
     send_status('done loading iris.')
     
-load_iris_dataset_2d()
 
