@@ -1,16 +1,14 @@
-from typing import Dict
+import subprocess
 
 class core:
 
     def simple_execute(self, code:str):
-        print('before exec:')
         try:
-            exec(code)
-        except KeyError:
-            print('key error')
+            subprocess.run(['python', '-c', code], capture_output=True, text=True)
+            return True
         except:
-            print('any error')
-        return True
+            print('Exec Failed')
+            return False
     
     def __call__(self, input:str):
         return self.simple_execute(input)
