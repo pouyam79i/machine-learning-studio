@@ -84,10 +84,8 @@ class core():
 
     # returns useable code after analyzing the user request
     def run(self, input:dict)->str:
-        try:
-            return self.simple_build(input)
-        except:
-            return ''
+        return self.simple_build(input)
+
 
     # another way to call run
     def __call__(self, input:dict):
