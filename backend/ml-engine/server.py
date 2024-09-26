@@ -20,6 +20,14 @@ def process(raw_data):
         data = json.loads(raw_data)
         print('executing for user: ', data['user_hash'])
         ml_engine(data['code'])    
+        feedback({
+            'status':200,
+            'user_hash': data['user_hash'],
+            'data': {
+                'type':'status',
+                'data': 'execution is done.'
+            }
+        })
     except:
         print("failed to execute")
         feedback({

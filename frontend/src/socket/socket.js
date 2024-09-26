@@ -19,7 +19,6 @@ const createConnection = (address = "127.0.0.1:8080/run", options = {}) => {
   // on receiving msg
   socket.onmessage = (event) => {
     const data = JSON.parse(event.data);
-    console.log(data);
     // passing data to options
     if (data.type && options[data.type]) {
       options[data.type](data.data);
