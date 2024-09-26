@@ -123,23 +123,24 @@ const DiagramEngineFlow = () => {
     status: (data) => {
       setEngineStatus(data);
     },
-    // node_status: (data) => {
-    //   data = JSON.parse(data);
-    //   console.log(data)
-    //   setNodes(
-    //     nodes.map((node) => {
-    //       if (node.id == data['node_hash'])
-    //         return {
-    //           ...node,
-    //           data: {
-    //             ...node.data,
-    //             status: data['status'],
-    //           },
-    //         };
-    //       else return node;
-    //     })
-    //   );
-    // }
+    node_status: (data) => {
+      data = JSON.parse(data);
+      console.log(data);
+
+      setNodes((nds) =>
+        nds.map((node) => {
+          if (node.id == data["node_hash"]) {
+            return {
+              ...node,
+              data: {
+                ...node.data,
+                status: data["status"],
+              },
+            };
+          } else return node;
+        })
+      );
+    },
   };
 
   // Apply changes with side effect
@@ -152,6 +153,17 @@ const DiagramEngineFlow = () => {
         onRestore();
         break;
       case "run":
+        setNodes((nds) =>
+          nds.map((node) => {
+              return {
+                ...node,
+                data: {
+                  ...node.data,
+                  status: 'inactive',
+                },
+              };
+          })
+        );
         runDiagram(nodes, edges, options, setEngineStatus);
         break;
     }
