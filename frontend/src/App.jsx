@@ -32,6 +32,9 @@ export const Context = createContext();
  * @returns Structured application.
  */
 function App() {
+  const [appNodesDataChanger, setAppNodesDataChanger] = useState({
+    setNodes: null,
+  });
   const [selectedItem, setSelectedItem] = useState();
   const [appStatus, setAppStatus] = useState("dev");
   const [engineStatus, setEngineStatus] = useState("Disconnected");
@@ -67,6 +70,7 @@ function App() {
         useAppStatus: { appStatus, changeAppStatus },
         usePopUp: { showPopUp, setShowPopUp, changePopupData },
         useEngineStatus: { engineStatus, setEngineStatus },
+        appNodesRelatedData: { appNodesDataChanger, setAppNodesDataChanger },
       }}
     >
       {/* pop up */}

@@ -37,11 +37,26 @@ export const DiagramContext = createContext();
  * @returns a Diagram Engine for ML studio
  */
 const DiagramEngineFlow = () => {
+  // *************** app context
+  const {
+    useAppStatus: { appStatus, changeAppStatus },
+    usePopUp: { showPopUp, setShowPopUp, changePopupData },
+    useEngineStatus: { engineStatus, setEngineStatus },
+    appNodesRelatedData: { appNodesDataChanger, setAppNodesDataChanger },
+  } = useContext(Context);
+
   // ******************* Node and Edge related functions and hooks
   // Node types
   const nodeTypes = useMemo(() => ({ SimpleNode: SimpleNode }), []);
   // nodes list
   const [nodes, setNodes] = useState([]);
+  // nodes for global ctx
+  useEffect(() => {
+    setAppNodesDataChanger({
+      setNodes: setNodes,
+    });
+  }, []);
+
   // edges list
   const [edges, setEdges] = useState([]);
 
@@ -103,13 +118,6 @@ const DiagramEngineFlow = () => {
     restoreFlow();
   }, [setNodes, setViewport]);
 
-  // *************** hook diagram data with side effect:
-  const {
-    useAppStatus: { appStatus, changeAppStatus },
-    usePopUp: { showPopUp, setShowPopUp, changePopupData },
-    useEngineStatus: { engineStatus, setEngineStatus },
-  } = useContext(Context);
-
   // options
   const options = {
     popup: (data) => {
@@ -155,13 +163,13 @@ const DiagramEngineFlow = () => {
       case "run":
         setNodes((nds) =>
           nds.map((node) => {
-              return {
-                ...node,
-                data: {
-                  ...node.data,
-                  status: 'inactive',
-                },
-              };
+            return {
+              ...node,
+              data: {
+                ...node.data,
+                status: "inactive",
+              },
+            };
           })
         );
         runDiagram(nodes, edges, options, setEngineStatus);

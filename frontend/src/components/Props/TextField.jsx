@@ -1,44 +1,54 @@
 import React, { useCallback, useContext, useState } from "react";
-import { DiagramContext } from "../../engine/DiagramEngine";
+import { Context } from "../../App";
 
-const TextField = ({ prop }) => {
-  // const [isValueChanged, setIsValueChanged] = useState(false);
+const TextField = ({ prop, node_id }) => {
+  const [isValueChanged, setIsValueChanged] = useState(false);
 
-  // const {
-  //   nodeRelated: [nodes, setNodes],
-  // } = useContext(DiagramContext);
+  const {
+    appNodesRelatedData: { appNodesDataChanger, setAppNodesDataChanger },
+  } = useContext(Context);
 
-  // const onChange = useCallback(() => {
-  //   setIsValueChanged(true);
-  // }, []);
+  const onChange = useCallback(() => {
+    setIsValueChanged(true);
+  }, []);
 
-  // const onKeyDown = useCallback((evt) => {
-  //   if (evt.code == "Enter") {
-  //     setIsValueChanged(false);
-  //     setNodes((nds) =>
-  //       nds.map((node) => {
-  //         if (node.id === data.id) {
-  //           return {
-  //             ...node,
-  //             data: {
-  //               ...node.data,
-  //               label: evt.target.value,
-  //             },
-  //           };
-  //         }
+  const onKeyDown = useCallback((evt) => {
+    if (evt.code == "Enter") {
+      setIsValueChanged(false);
+      appNodesDataChanger.setNodes((nds) =>
+        nds.map((node) => {
+          if (node.id == node_id) {
+            return {
+              ...node,
+              data: {
+                ...node.data,
+                props: node.data.props.map((p) => {
+                  if (p.id == prop.id)
+                    return {
+                      ...p,
+                      data: evt.target.value,
+                    };
+                  else return p;
+                }),
+              },
+            };
+          }
 
-  //         return node;
-  //       })
-  //     );
-  //   }
-  // }, []);
+          return node;
+        })
+      );
+    }
+  }, []);
 
   return (
     <div className="prop-text-field">
       <label>{prop.title}</label>
       <input
+        onChange={onChange}
+        onKeyDown={onKeyDown}
         placeholder={prop.tag + "..."}
         defaultValue={prop.data || ""}
+        style={{ border: isValueChanged ? "1px solid red" : "none" }}
       ></input>
     </div>
   );
