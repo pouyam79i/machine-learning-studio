@@ -1,8 +1,12 @@
 from sklearn import datasets
 from sklearn.model_selection import train_test_split
 
-def iris_2d(node_hash:str=NODE_HASH, source_hash:str=SOURCE_HASH, target_hash:str=TARGET_HASH):
+def iris(node_hash:str=NODE_HASH, source_hash:str=SOURCE_HASH, target_hash:str=TARGET_HASH):
     send_status('loading iris dataset...')
+    send_node_status({
+        'node_hash':node_hash,
+        'status':'active'
+    })
     
     iris = datasets.load_iris()
     X = iris.data[:, :2]  # Use only the first two features for 2D.
@@ -14,4 +18,8 @@ def iris_2d(node_hash:str=NODE_HASH, source_hash:str=SOURCE_HASH, target_hash:st
     # ****************** this is a standards ******************
     setTransfer(target_hash, [X, y, X_train, X_test, y_train, y_test])
     send_status('done loading iris.')
+    send_node_status({
+        'node_hash':node_hash,
+        'status':'done'
+    })
     

@@ -4,6 +4,10 @@ from io import BytesIO
 
 
 def scatter_plot(node_hash:str=NODE_HASH, source_hash:str=SOURCE_HASH, target_hash:str=TARGET_HASH):
+    send_node_status({
+        'node_hash':node_hash,
+        'status':'active'
+    })
     xx, yy, Z = getTransfer(source_hash)
     send_status('generating plot on given model')
     
@@ -24,5 +28,9 @@ def scatter_plot(node_hash:str=NODE_HASH, source_hash:str=SOURCE_HASH, target_ha
     buf.close()
 
     send_status('done generating plot.')
+    send_node_status({
+        'node_hash':node_hash,
+        'status':'done'
+    })
     send_popup(data={'data':img_str, 'title':'Decision Boundary', 'type':'base64'})
 

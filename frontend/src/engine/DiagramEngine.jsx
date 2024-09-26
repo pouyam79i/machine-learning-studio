@@ -123,6 +123,22 @@ const DiagramEngineFlow = () => {
     status: (data) => {
       setEngineStatus(data);
     },
+    node_status: (data) => {
+      data = JSON.parse(data);
+      setNodes(
+        nodes.map((node) => {
+          if (node.id == data['node_hash'])
+            return {
+              ...node,
+              data: {
+                ...node.data,
+                status: data['node_status'],
+              },
+            };
+          else return node;
+        })
+      );
+    }
   };
 
   // Apply changes with side effect

@@ -42,6 +42,17 @@ def send_status(data, user_hash=USER_HASH):
                 'data':  data
             }
         })
+    
+# updates a node status in ui
+def send_node_status(data, user_hash=USER_HASH):
+    feedback({
+            'status':200,
+            'user_hash': user_hash,
+            'data': {
+                'type':'node_status',
+                'data':  json.dumps(data)
+            }
+        })
 
 # set data in transfer
 def setTransfer(hash, data):

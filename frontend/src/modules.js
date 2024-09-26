@@ -60,8 +60,8 @@ const Modules = {
           items: [
             {
               id: 3,
-              title: "Iris Dataset 2D",
-              tag: "iris_2d",
+              title: "Iris Dataset",
+              tag: "iris",
               props: [
                 {
                   id: 0,
