@@ -8,8 +8,8 @@ def decision_boundary(node_hash:str=NODE_HASH, source_hash:str=SOURCE_HASH, targ
         'node_hash':node_hash,
         'status':'active'
     })
-    xx, yy, Z = getTransfer(source_hash)
     send_status('generating plot on given model')
+    xx, yy, Z = getTransfer(source_hash)
     
     plt.contourf(xx, yy, Z, alpha=0.3)
     plt.title('Decision Boundary')

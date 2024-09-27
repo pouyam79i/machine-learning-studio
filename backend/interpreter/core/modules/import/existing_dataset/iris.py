@@ -8,12 +8,15 @@ def iris(node_hash:str=NODE_HASH, source_hash:str=SOURCE_HASH, target_hash:str=T
         'status':'active'
     })
     
+    # test portion
+    test_portion = float(props[node_hash][0]['data'])
+    
     iris = datasets.load_iris()
     X = iris.data[:, :2]  # Use only the first two features for 2D.
     y = iris.target
 
     # Split the dataset into training and testing sets
-    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=test_portion, random_state=42)
     
     # ****************** this is a standards ******************
     setTransfer(target_hash, [X, y, X_train, X_test, y_train, y_test])

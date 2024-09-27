@@ -49,6 +49,13 @@ const Modules = {
               type: "text-field",
               data: "",
             },
+            {
+              id: 3,
+              title: "Test Portion",
+              tag: "test_portion",
+              type: "text-field",
+              data: "0.2",
+            },
           ],
           items: null,
         },
@@ -65,6 +72,13 @@ const Modules = {
               props: [
                 {
                   id: 0,
+                  title: "Test Portion",
+                  tag: "test_portion",
+                  type: "text-field",
+                  data: "0.2",
+                },
+                {
+                  id: 1,
                   title: "Learn more about iris dataset",
                   tag: "description",
                   type: "description",

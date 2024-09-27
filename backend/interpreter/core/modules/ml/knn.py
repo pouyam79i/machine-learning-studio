@@ -7,8 +7,10 @@ def knn(node_hash:str=NODE_HASH, source_hash:str=SOURCE_HASH, target_hash:str=TA
         'status':'active'
     })
     send_status('training dataset with K-NN...')
-    k = int(props[node_hash][0]['data'])
     X, _, X_train, _, y_train, _ = getTransfer(source_hash)
+    
+    # number of neighbors 
+    k = int(props[node_hash][0]['data'])
 
     # Train the KNN model
     knn = KNeighborsClassifier(n_neighbors=k)
@@ -22,7 +24,7 @@ def knn(node_hash:str=NODE_HASH, source_hash:str=SOURCE_HASH, target_hash:str=TA
     Z = knn.predict(np.c_[xx.ravel(), yy.ravel()])
     Z = Z.reshape(xx.shape)
     
-    send_status('done training with KNN.')
+    send_status('done training.')
     setTransfer(target_hash, [xx, yy, Z])
     send_node_status({
         'node_hash':node_hash,
