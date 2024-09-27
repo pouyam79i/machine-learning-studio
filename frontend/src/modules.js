@@ -122,7 +122,7 @@ const Modules = {
               title: "Number of neighbors...",
               tag: "neighbors",
               type: "text-field",
-              data: "",
+              data: "3",
             },
             {
               id: 1,
