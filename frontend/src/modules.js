@@ -30,22 +30,22 @@ const Modules = {
           props: [
             {
               id: 0,
-              title: "Address",
-              tag: "address",
+              title: "DB Name",
+              tag: "db_name",
               type: "text-field",
               data: "",
             },
             {
               id: 1,
               title: "Features",
-              tag: "features",
+              tag: "X",
               type: "text-field",
               data: "",
             },
             {
               id: 2,
               title: "Targets",
-              tag: "targets",
+              tag: "y",
               type: "text-field",
               data: "",
             },
@@ -108,7 +108,7 @@ const Modules = {
               title: "Number of neighbors...",
               tag: "neighbors",
               type: "text-field",
-              data: "3",
+              data: "",
             },
             {
               id: 1,
