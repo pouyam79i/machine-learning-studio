@@ -133,8 +133,6 @@ const DiagramEngineFlow = () => {
     },
     node_status: (data) => {
       data = JSON.parse(data);
-      console.log(data);
-
       setNodes((nds) =>
         nds.map((node) => {
           if (node.id == data["node_hash"]) {

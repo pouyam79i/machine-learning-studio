@@ -3,7 +3,7 @@ import base64
 from io import BytesIO
 
 
-def scatter_plot(node_hash:str=NODE_HASH, source_hash:str=SOURCE_HASH, target_hash:str=TARGET_HASH):
+def decision_boundary(node_hash:str=NODE_HASH, source_hash:str=SOURCE_HASH, target_hash:str=TARGET_HASH):
     send_node_status({
         'node_hash':node_hash,
         'status':'active'
