@@ -5,7 +5,7 @@ class core:
     def simple_execute(self, code:str):     
         print('begin')
         r = subprocess.run(['python', '-c', code], capture_output=True, text=True)
-        # print(r)
+        print(r)
         if r.returncode != 0 :
             raise Exception('output code: {}, error: {}'.format(r.returncode, r.stderr.__str__()))
 

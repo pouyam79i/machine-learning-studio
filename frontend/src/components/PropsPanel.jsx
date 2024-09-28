@@ -41,9 +41,9 @@ const PropsPanel = () => {
         {selectedItem.props.map((prop, index) => {
           switch (prop.type) {
             case "text-field":
-              return <TextField key={index} node_id={selectedItem.id} prop={prop}></TextField>;
+              return <TextField key={selectedItem.id + "@" + index} node_hash={selectedItem.id} prop={prop}></TextField>;
             case "description":
-              return <Description key={index} prop={prop}></Description>;
+              return <Description key={selectedItem.id + "@" + index} prop={prop}></Description>;
             default:
               break;
           }

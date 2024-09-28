@@ -1,4 +1,5 @@
-from sklearn import datasets
+import pandas as pd
+from sklearn.datasets import load_iris
 from sklearn.model_selection import train_test_split
 
 def iris(node_hash:str=NODE_HASH, source_hash:str=SOURCE_HASH, target_hash:str=TARGET_HASH):
@@ -11,10 +12,10 @@ def iris(node_hash:str=NODE_HASH, source_hash:str=SOURCE_HASH, target_hash:str=T
     # test portion
     test_portion = float(props[node_hash][0]['data'])
     
-    iris = datasets.load_iris()
-    X = iris.data[:, :2]  # Use only the first two features for 2D.
+    iris = load_iris()
+    X = iris.data[:, :2]  # Use only the first two features for 2D plotting
     y = iris.target
-
+        
     # Split the dataset into training and testing sets
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=test_portion, random_state=42)
     

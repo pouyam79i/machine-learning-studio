@@ -1,7 +1,7 @@
 import React, { useCallback, useContext, useState } from "react";
 import { Context } from "../../App";
 
-const TextField = ({ prop, node_id }) => {
+const TextField = ({ prop, node_hash }) => {
   const [isValueChanged, setIsValueChanged] = useState(false);
 
   const {
@@ -17,7 +17,8 @@ const TextField = ({ prop, node_id }) => {
       setIsValueChanged(false);
       appNodesDataChanger.setNodes((nds) =>
         nds.map((node) => {
-          if (node.id == node_id) {
+          if (node.id == node_hash) {
+            console.log(node.id + "=" + "changed")
             return {
               ...node,
               data: {

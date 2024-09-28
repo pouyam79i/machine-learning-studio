@@ -14,14 +14,14 @@ def linear_regression(node_hash:str=NODE_HASH, source_hash:str=SOURCE_HASH, targ
     model.fit(X_train, y_train)
 
     # Make predictions
-    y_pred = model.predict(X_test)
+    Z = model.predict(X_test)
 
     # Create a range of values for X to plot the regression line
-    X_range = np.linspace(X.min(), X.max(), 100).reshape(-1, 1)
-    y_range = model.predict(X_range)
+    xx = np.linspace(X.min(), X.max(), 100)
+    yy = model.predict(xx)
 
     send_status('done training.')
-    setTransfer(target_hash, [X_range, y_range, None])
+    setTransfer(target_hash, [xx, yy, Z])
     send_node_status({
         'node_hash':node_hash,
         'status':'done'

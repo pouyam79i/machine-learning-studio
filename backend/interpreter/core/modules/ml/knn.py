@@ -7,7 +7,7 @@ def knn(node_hash:str=NODE_HASH, source_hash:str=SOURCE_HASH, target_hash:str=TA
         'status':'active'
     })
     send_status('training dataset with K-NN...')
-    X, _, X_train, _, y_train, _ = getTransfer(source_hash)
+    X, y, X_train, X_test, y_train, y_test = getTransfer(source_hash)
     
     # number of neighbors 
     k = int(props[node_hash][0]['data'])

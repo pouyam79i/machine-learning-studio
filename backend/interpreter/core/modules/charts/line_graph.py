@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 import base64
 from io import BytesIO
 
-def line_graph(y_test, y_pred, label:str='Dot Line: Actual vs. Predicted', actual:str='Actual', predicted:str='Predicted'):
+def line_graph(node_hash:str=NODE_HASH, source_hash:str=SOURCE_HASH, target_hash:str=TARGET_HASH):
     send_node_status({
         'node_hash':node_hash,
         'status':'active'
