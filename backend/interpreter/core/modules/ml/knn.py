@@ -7,7 +7,7 @@ def knn(node_hash:str=NODE_HASH, source_hash:str=SOURCE_HASH, target_hash:str=TA
         'status':'active'
     })
     send_status('training dataset with K-NN...')
-    X, y, X_train, X_test, y_train, y_test = getTransfer(source_hash)
+    X, y, X_train, X_test, y_train, y_test, labels = getTransfer(source_hash)
     
     # number of neighbors 
     k = int(props[node_hash][0]['data'])
@@ -25,7 +25,7 @@ def knn(node_hash:str=NODE_HASH, source_hash:str=SOURCE_HASH, target_hash:str=TA
     Z = Z.reshape(xx.shape)
     
     send_status('done training.')
-    setTransfer(target_hash, [xx, yy, Z])
+    setTransfer(target_hash, [xx, yy, Z, labels])
     send_node_status({
         'node_hash':node_hash,
         'status':'done'

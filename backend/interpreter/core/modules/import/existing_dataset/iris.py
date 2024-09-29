@@ -20,7 +20,7 @@ def iris(node_hash:str=NODE_HASH, source_hash:str=SOURCE_HASH, target_hash:str=T
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=test_portion, random_state=42)
     
     # ****************** this is a standards ******************
-    setTransfer(target_hash, [X, y, X_train, X_test, y_train, y_test])
+    setTransfer(target_hash, [X, y, X_train, X_test, y_train, y_test, ['sepal width (cm)', 'sepal length (cm)']])
     send_status('done loading iris.')
     send_node_status({
         'node_hash':node_hash,
