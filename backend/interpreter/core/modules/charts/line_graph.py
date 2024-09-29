@@ -9,13 +9,20 @@ def line_graph(node_hash:str=NODE_HASH, source_hash:str=SOURCE_HASH, target_hash
     })
     send_status('generating plot on given model')
     
-    xx, yy, _ = getTransfer(source_hash)
+    xx, yy, _, train, labels = getTransfer(source_hash)
     
     plt.figure(figsize=(10, 6))
+    if (train):
+        X_train, y_train = train
+        plt.scatter(X_train, y_train)
     plt.plot(xx, yy, color='red', linewidth=2, label='Regression Line')
     plt.title('Linear Regression Model.')
-    plt.xlabel('X')
-    plt.ylabel('y')
+    if (labels): 
+        plt.xlabel(labels[0][0])
+        plt.ylabel(labels[1])
+    else: 
+        plt.xlabel('feature')
+        plt.ylabel('target') 
     plt.legend()
     plt.grid()
     

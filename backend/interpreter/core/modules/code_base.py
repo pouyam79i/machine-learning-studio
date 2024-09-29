@@ -3,6 +3,7 @@ import json
 import requests
 
 FEEDBACK_SERVER = 'http://localhost:8080/feedback'
+DB_ADDR = './db/'
 
 # data transfer dict
 # set: target_hash <- data
