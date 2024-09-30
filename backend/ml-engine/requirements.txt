@@ -1,0 +1,8 @@
+Flask==3.0.3
+requests==2.32.3
+numpy==1.26.4
+pandas==2.2.2
+matplotlib==3.8.3
+matplotlib-inline==0.1.6
+scikit-learn==1.5.0
+subprocess.run==0.0.8
