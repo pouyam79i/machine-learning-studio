@@ -71,7 +71,7 @@ func main() {
 	e.Use(middleware.Recover())
 
 	// application page
-	e.Static("/", "build")
+	e.Static("/", "dist")
 
 	// ws route
 	e.GET("/run", handleWebSocket)
@@ -80,7 +80,7 @@ func main() {
 	e.POST("/feedback", feedback)
 
 	// start server
-	e.Logger.Fatal(e.Start(":8080"))
+	e.Logger.Fatal(e.Start(":6000"))
 }
 
 // complete feedback function

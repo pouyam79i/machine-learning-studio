@@ -1,6 +1,6 @@
 import createConnection from "../socket/socket";
 
-const DEPLOY_API_ADDRESS = "localhost:8080/run";
+const DEPLOY_API_ADDRESS = "localhost:6000/run";
 
 let engineSocket = null;
 let setEngineStatus = (message) => {};

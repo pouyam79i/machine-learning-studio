@@ -1,10 +1,10 @@
 /**
  *  creates a new socket for full-duplex communication.
- * @param {*} address should be like: 'localhost:8080'
+ * @param {*} address should be like: 'localhost:6000'
  * @param {*} options how to handle received msg data.
  * @returns socket
  */
-const createConnection = (address = "127.0.0.1:8080/run", options = {}) => {
+const createConnection = (address = "127.0.0.1:6000/run", options = {}) => {
   const socket = new WebSocket("ws://" + address);
 
   // on open connection
