@@ -14,4 +14,5 @@ RUN pip install --no-cache-dir -r requirements.txt
 EXPOSE 4000
 
 # Define the command to run the Flask application using Gunicorn
-CMD ["flask", "run", "--host=0.0.0.0", "--port=4000"]
+CMD ["python", "server.py"]
+

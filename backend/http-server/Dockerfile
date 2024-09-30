@@ -1,33 +1,26 @@
-# Use the official Golang image as a builder
-FROM golang:1.22 AS builder
+# syntax=docker/dockerfile:1
+FROM golang:1.22
 
-# Set the Current Working Directory inside the container
+# Set destination for COPY
 WORKDIR /app
 
-# Copy go.mod and go.sum files to the working directory
+# Download Go modules
 COPY go.mod go.sum ./
-
-# Download all dependencies. Dependencies will be cached if the go.mod and go.sum files are not changed
 RUN go mod download
 
-# Copy the source code into the container
+# Copy the source code. Note the slash at the end, as explained in
+# https://docs.docker.com/reference/dockerfile/#copy
 COPY . .
 
-# Build the Go app
-RUN go build -o myapp .
+# Build
+RUN CGO_ENABLED=0 GOOS=linux go build -o /myserver
 
-# Start a new stage from scratch
-FROM alpine:latest
-
-# Set the Current Working Directory inside the container
-WORKDIR /app
-
-# Copy the Pre-built binary file from the previous stage
-COPY --from=builder /app/myapp .
-
-# Expose port 6000 to the outside world
+# Optional:
+# To bind to a TCP port, runtime parameters must be supplied to the docker command.
+# But we can document in the Dockerfile what ports
+# the application is going to listen on by default.
+# https://docs.docker.com/reference/dockerfile/#expose
 EXPOSE 6000
 
-# Command to run the executable
-CMD ["./myapp"]
-
+# Run
+CMD ["/myserver"]
