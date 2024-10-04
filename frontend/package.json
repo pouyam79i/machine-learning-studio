@@ -7,7 +7,8 @@
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "test": "jest"
   },
   "dependencies": {
     "@chakra-ui/react": "^2.8.2",
@@ -16,12 +17,14 @@
     "@xyflow/react": "^12.0.4",
     "bootstrap": "^5.3.3",
     "framer-motion": "^11.3.19",
+    "jest-environment-jsdom": "^29.7.0",
     "react": "^18.3.1",
     "react-bootstrap": "^2.10.4",
     "react-dom": "^18.3.1",
     "uuid": "^10.0.0"
   },
   "devDependencies": {
+    "@testing-library/react": "^15.0.7",
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
     "@vitejs/plugin-react": "^4.3.1",
@@ -29,6 +32,8 @@
     "eslint-plugin-react": "^7.34.3",
     "eslint-plugin-react-hooks": "^4.6.2",
     "eslint-plugin-react-refresh": "^0.4.7",
+    "identity-obj-proxy": "^3.0.0",
+    "jest": "^29.7.0",
     "jsdoc": "^4.0.3",
     "vite": "^5.3.4"
   }

@@ -67,11 +67,16 @@ func main() {
 	e := echo.New()
 
 	// middleware
-	// e.Use(middleware.Logger())
+	e.Use(middleware.Logger())
 	e.Use(middleware.Recover())
+	e.Use(middleware.CORS())
 
-	// application page
+	// serve static application page
 	e.Static("/", "dist")
+
+	e.GET("/test", func(c echo.Context) error {
+		return c.String(200, "Hello World")
+	})
 
 	// ws route
 	e.GET("/run", handleWebSocket)
@@ -80,7 +85,7 @@ func main() {
 	e.POST("/feedback", feedback)
 
 	// start server
-	e.Logger.Fatal(e.Start(":6000"))
+	e.Logger.Fatal(e.Start(":8080"))
 }
 
 // complete feedback function

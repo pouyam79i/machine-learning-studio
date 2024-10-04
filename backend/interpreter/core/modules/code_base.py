@@ -2,7 +2,7 @@
 import json
 import requests
 
-FEEDBACK_SERVER = 'http://localhost:6000/feedback'
+FEEDBACK_SERVER = 'http://localhost:8080/feedback'
 DB_ADDR = './db/'
 
 # data transfer dict

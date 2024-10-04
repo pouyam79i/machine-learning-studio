@@ -77,7 +77,7 @@ export const runExample = (useNodes, useEdges, setShowPopUp) => {
         else return node;
       })
     );
-  }, 6000);
+  }, 8080);
 
   // display popup chart
   setTimeout(() => {
