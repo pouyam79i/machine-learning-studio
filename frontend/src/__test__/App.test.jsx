@@ -1,6 +1,5 @@
 import App from "../App";
-import { render } from "@testing-library/react";
-import "@testing-library/jest-dom";
+import { render, screen, fireEvent } from "@testing-library/react";
 
 test("demo", () => {
   expect("true").toBe("true");
