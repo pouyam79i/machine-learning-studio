@@ -1,7 +1,7 @@
 import { useCallback, useContext, useEffect, useState } from "react";
 import { Handle, Position } from "@xyflow/react";
 import { nodeStyle } from "./createNode";
-import { Context } from "../../App";
+import { AppContext } from "../../AppContext";
 import { DiagramContext } from "../DiagramEngine";
 
 import React from "react";
@@ -40,7 +40,7 @@ const SimpleNode = ({ data }) => {
 
   const {
     useItem: { changeSelectedItem },
-  } = useContext(Context);
+  } = useContext(AppContext);
 
   return (
     <div

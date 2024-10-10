@@ -1,12 +1,12 @@
 import React, { useContext } from "react";
-import { Context } from "../App";
+import { AppContext } from "../AppContext";
 import Description from "./Props/Description";
 import TextField from "./Props/TextField";
 
 const PropsPanel = () => {
   const {
     useItem: { selectedItem },
-  } = useContext(Context);
+  } = useContext(AppContext);
 
   // Return empty props panel
   if (!selectedItem || !selectedItem.props)
@@ -41,9 +41,20 @@ const PropsPanel = () => {
         {selectedItem.props.map((prop, index) => {
           switch (prop.type) {
             case "text-field":
-              return <TextField key={selectedItem.id + "@" + index} node_hash={selectedItem.id} prop={prop}></TextField>;
+              return (
+                <TextField
+                  key={selectedItem.id + "@" + index}
+                  node_hash={selectedItem.id}
+                  prop={prop}
+                ></TextField>
+              );
             case "description":
-              return <Description key={selectedItem.id + "@" + index} prop={prop}></Description>;
+              return (
+                <Description
+                  key={selectedItem.id + "@" + index}
+                  prop={prop}
+                ></Description>
+              );
             default:
               break;
           }

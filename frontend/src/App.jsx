@@ -3,27 +3,8 @@ import NavBar from "./components/NavBar";
 import MainPanel from "./components/MainPanel";
 import PropsPanel from "./components/PropsPanel";
 import ToolsPanel from "./components/ToolsPanel";
-import { useState } from "react";
-import { createContext } from "react";
+import { AppContextProvider } from "./AppContext";
 import PopUp from "./components/PopUp";
-
-/**
- *  app status list.
- *
- *  dev is the default state: development, done, idle.
- *
- *  run is for algorithm execution: compile -> upload -> execute -> display results.
- *
- *  save is for saving diagram.
- *
- *  load is for loading diagram.
- */
-const APP_STATUS = ["dev", "run", "save", "load"];
-
-/**
- *  global app parameters in context.
- */
-export const Context = createContext();
 
 /**
  * This component is the bare bones of the application.
@@ -32,54 +13,15 @@ export const Context = createContext();
  * @returns Structured application.
  */
 function App() {
-  const [appNodesDataChanger, setAppNodesDataChanger] = useState({
-    setNodes: null,
-  });
-  const [selectedItem, setSelectedItem] = useState();
-  const [appStatus, setAppStatus] = useState("dev");
-  const [engineStatus, setEngineStatus] = useState("Disconnected");
-  const [popupData, setPopupData] = useState({
-    title: "K-NN model on Iris",
-    data: "", // could be a url or base64 encoded string
-    type: "base64", // set to 'base64' or 'url'.
-  });
-  const [showPopUp, setShowPopUp] = useState(false);
-
-  const changeSelectedItem = (newItem) => {
-    setSelectedItem(newItem);
-  };
-
-  const changeAppStatus = (newAppStatus) => {
-    if (APP_STATUS.indexOf(newAppStatus) === -1)
-      console.log("illegal app status: " + newAppStatus);
-    else setAppStatus(newAppStatus);
-  };
-
-  const changePopupData = (title = "", data = "", type = "") => {
-    setPopupData({
-      title: title,
-      data: data,
-      type: type,
-    });
-  };
-
   return (
-    <Context.Provider
-      value={{
-        useItem: { selectedItem, changeSelectedItem },
-        useAppStatus: { appStatus, changeAppStatus },
-        usePopUp: { showPopUp, setShowPopUp, changePopupData },
-        useEngineStatus: { engineStatus, setEngineStatus },
-        appNodesRelatedData: { appNodesDataChanger, setAppNodesDataChanger },
-      }}
-    >
+    <AppContextProvider>
       {/* pop up */}
       <PopUp
-        title={popupData.title}
-        data={popupData.data}
-        type={popupData.type}
-        showPopUp={showPopUp}
-        setShowPopUp={setShowPopUp}
+      // title={popupData.title}
+      // data={popupData.data}
+      // type={popupData.type}
+      // showPopUp={showPopUp}
+      // setShowPopUp={setShowPopUp}
       ></PopUp>
       {/* app */}
       <Grid
@@ -104,7 +46,7 @@ function App() {
           <PropsPanel />
         </GridItem>
       </Grid>
-    </Context.Provider>
+    </AppContextProvider>
   );
 }
 

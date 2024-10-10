@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import ToolMenu from "./ToolMenu";
 import { useContext } from "react";
-import { Context } from "../../App";
+import { AppContext } from "../../AppContext";
 import { getNodePostByUrl } from "../../engine/nodes/createNode";
 
 /**
@@ -15,7 +15,7 @@ const ToolItem = ({ item = null, url = "/" }) => {
   const [expandMenu, setExpandMenu] = useState(false);
   const {
     useItem: { changeSelectedItem },
-  } = useContext(Context);
+  } = useContext(AppContext);
 
   if (item == null) {
     console.log("null item");

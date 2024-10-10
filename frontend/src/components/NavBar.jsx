@@ -1,11 +1,11 @@
 import React, { useContext } from "react";
-import { Context } from "../App";
+import { AppContext } from "../AppContext";
 
 const NavBar = () => {
   const {
     useAppStatus: { appStatus, changeAppStatus },
     useEngineStatus: { engineStatus, setEngineStatus },
-  } = useContext(Context);
+  } = useContext(AppContext);
 
   const getEngineStatusColor = (status = "") => {
     status = status.toLowerCase();

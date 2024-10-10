@@ -1,12 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
+import { AppContext } from "../AppContext";
 
-const PopUp = ({
-  title = "This is Pop Up",
-  data = "",
-  type = "",
-  showPopUp = false,
-  setShowPopUp,
-}) => {
+const PopUp = () => {
+  const {
+    usePopUp: { popupData, showPopUp, setShowPopUp },
+  } = useContext(AppContext);
+
   return (
     <div
       id="pop-up-cover"
@@ -17,9 +16,11 @@ const PopUp = ({
       style={{ display: showPopUp ? "flex" : "none" }}
     >
       <div className="container">
-        {type === "url" && <img src={data}></img>}
-        {type === "base64" && <img src={"data:image/png;base64," + data}></img>}
-        <div className="description">{title}</div>
+        {popupData.type === "url" && <img src={popupData.data}></img>}
+        {popupData.type === "base64" && (
+          <img src={"data:image/png;base64," + popupData.data}></img>
+        )}
+        <div className="description">{popupData.title}</div>
       </div>
     </div>
   );

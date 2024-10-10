@@ -24,7 +24,7 @@ import {
 // importing styles
 import "@xyflow/react/dist/style.css";
 import "./nodes/node-style.css";
-import { Context } from "../App";
+import { AppContext } from "../AppContext";
 import { runDiagram } from "./engine";
 
 const flowKey = "ml-studio/diagrams/last";
@@ -43,7 +43,7 @@ const DiagramEngineFlow = () => {
     usePopUp: { showPopUp, setShowPopUp, changePopupData },
     useEngineStatus: { engineStatus, setEngineStatus },
     appNodesRelatedData: { appNodesDataChanger, setAppNodesDataChanger },
-  } = useContext(Context);
+  } = useContext(AppContext);
 
   // ******************* Node and Edge related functions and hooks
   // Node types

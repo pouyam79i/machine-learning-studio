@@ -8,7 +8,9 @@
     "build": "vite build",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
-    "test": "jest"
+    "test": "vitest",
+    "test:watch": "vitest watch",
+    "test:ui": "vitest ui"
   },
   "dependencies": {
     "@chakra-ui/react": "^2.8.2",
@@ -31,7 +33,7 @@
     "@testing-library/user-event": "^14.5.2",
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
-    "@vitejs/plugin-react": "^4.3.1",
+    "@vitejs/plugin-react": "^4.3.2",
     "babel-jest": "^29.7.0",
     "eslint": "^8.57.0",
     "eslint-plugin-react": "^7.34.3",
@@ -42,6 +44,7 @@
     "jest-environment-jsdom": "^29.7.0",
     "jest-environment-node": "^29.7.0",
     "jsdoc": "^4.0.3",
+    "resize-observer-polyfill": "^1.5.1",
     "vite": "^5.3.4",
     "vitest": "^2.1.2"
   }
