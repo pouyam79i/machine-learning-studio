@@ -65,7 +65,6 @@ const SimpleNode = ({ data }) => {
           style={{ border: isValueChanged ? "1px solid red" : "none" }}
         />
       </div>
-
       {data.post !== "target" && (
         <Handle type="target" position={Position.Right} />
       )}

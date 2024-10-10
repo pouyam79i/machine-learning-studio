@@ -99,14 +99,37 @@ describe("Rendering components for purity", () => {
     expect(true).toBeTruthy();
   });
   it("tools/ToolItem", () => {
+    const sampleItemData = {
+      id: 0,
+      title: "Test-Btn",
+      tag: "test",
+      props: [],
+      items: null,
+    };
     render(
       <AppContextProvider>
-        <ToolItem />
+        <ToolItem item={sampleItemData} />
       </AppContextProvider>
     );
     expect(true).toBeTruthy();
   });
   it("tools/ToolMenu", () => {
+    const sample_menu = {
+      id: 1,
+      title: "TestMenu",
+      tag: "test-menu",
+      props: null,
+      items: [
+        {
+          id: 2,
+          title: "Test Item",
+          tag: "test-item",
+          props: [],
+          items: null,
+        },
+      ],
+    };
+
     render(<ToolMenu />);
     expect(true).toBeTruthy();
   });

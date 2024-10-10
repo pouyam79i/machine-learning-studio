@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import ToolMenu from "./ToolMenu";
 import { useContext } from "react";
 import { AppContext } from "../../AppContext";
@@ -46,7 +46,7 @@ const ToolItem = ({ item = null, url = "/" }) => {
   };
 
   return (
-    <div className="tool-item">
+    <div id={"tool-item-btn-" + item.id} className="tool-item">
       <button
         style={{
           background:

@@ -9,7 +9,6 @@ import ToolItem from "./ToolItem";
  */
 const ToolMenu = ({ items = null, url = "/" }) => {
   if (items == null || items.length == 0) {
-    console.log("no items!");
     return null;
   }
   return (

@@ -195,11 +195,13 @@ const DiagramEngineFlow = () => {
       const data = args.data;
 
       const position = screenToFlowPosition({
-        x: event.clientX,
-        y: event.clientY,
+        x: event.clientX || 0,
+        y: event.clientY || 0,
       });
 
       const newNode = nodeFactory(type, position, data);
+
+      event.dataTransfer.setData("application/test", JSON.stringify(newNode));
 
       setNodes((nodes) => nodes.concat(newNode));
     },
@@ -214,6 +216,7 @@ const DiagramEngineFlow = () => {
       }}
     >
       <ReactFlow
+        id="react-flow-container"
         nodes={nodes}
         onNodesChange={onNodesChange}
         edges={edges}
