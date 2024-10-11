@@ -5,7 +5,7 @@ services:
     ports:
       - "8080:8080" 
     environment:
-      INTERPRETER_SERVICE: http://interpreter/interpret
+      INTERPRETER_SERVICE: http://interpreter:4000/interpret
     networks:
       - app-network
     depends_on:
@@ -17,8 +17,8 @@ services:
     ports:
       - "4000:4000"  
     environment:
-      HTTP_SERVER_FEEDBACK: http://http-server/feedback
-      ML_ENGINE_EXEC: http://ml-engine/exec
+      HTTP_SERVER_FEEDBACK: http://http-server:8080/feedback
+      ML_ENGINE_EXEC: http://ml-engine:5000/exec
     networks:
       - app-network
 
@@ -27,7 +27,7 @@ services:
     ports:
       - "5000:5000"  
     environment:
-      HTTP_SERVER_FEEDBACK: http://http-server/feedback
+      HTTP_SERVER_FEEDBACK: http://http-server:8080/feedback
     networks:
       - app-network
 

@@ -92,7 +92,7 @@ func main() {
 	e.POST("/feedback", feedback)
 
 	// start server
-	e.Logger.Fatal(e.Start(":8080"))
+	e.Logger.Fatal(e.Start("0.0.0.0:8080"))
 }
 
 // complete feedback function
