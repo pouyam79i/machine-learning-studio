@@ -1,0 +1,184 @@
+# import general libs
+import json
+import requests
+
+FEEDBACK_SERVER = 'http://localhost:8080/feedback'
+DB_ADDR = './db/'
+
+# data transfer dict
+# set: target_hash <- data
+# get: source_hash -> data
+transfer = dict()
+
+# props dict
+# node_hash <- data
+props = dict()
+
+# function interfaces to communicate with user
+def feedback(json_data={}):
+    try:
+        r = requests.post(FEEDBACK_SERVER, json=json_data)
+        print('feedback res: ', r.status_code)
+    except:
+        print('feedback failed!')
+
+# displays a popup in ui
+def send_popup(data, user_hash='ca4e6999-23d9-4dc3-89d7-326c0aba61ca'):
+    feedback({
+            'status':200,
+            'user_hash': user_hash,
+            'data': {
+                'type':'popup',
+                'data':  json.dumps(data)
+            }
+        })
+
+# updates user status in ui
+def send_status(data, user_hash='ca4e6999-23d9-4dc3-89d7-326c0aba61ca'):
+    feedback({
+            'status':200,
+            'user_hash': user_hash,
+            'data': {
+                'type':'status',
+                'data':  data
+            }
+        })
+    
+# updates a node status in ui
+def send_node_status(data, user_hash='ca4e6999-23d9-4dc3-89d7-326c0aba61ca'):
+    feedback({
+            'status':200,
+            'user_hash': user_hash,
+            'data': {
+                'type':'node_status',
+                'data':  json.dumps(data)
+            }
+        })
+
+# set data in transfer
+def setTransfer(hash, data):
+    if hash == None or hash == '':
+        raise Exception('Method: Set(), Cannot Transfer Data')
+    transfer[hash] = data
+    
+# get data from transfer
+def getTransfer(hash):
+    if hash == None or hash == '':
+        raise Exception('Method: Get(), Cannot Transfer Data')
+    return transfer[hash]
+
+
+
+props = json.loads('{"0e3fd8a1-8aad-4036-8c52-a74006e24bba": [{"tag": "test_portion", "data": "0.2"}], "636eaab7-4f71-4d15-a261-df6067c9c321": [{"tag": "neighbors", "data": "3"}], "d208220c-6ed8-4612-8346-d8ffbcd83aac": []}')
+import pandas as pd
+from sklearn.datasets import load_iris
+from sklearn.model_selection import train_test_split
+
+def iris(node_hash:str='0e3fd8a1-8aad-4036-8c52-a74006e24bba', source_hash:str='', target_hash:str='636eaab7-4f71-4d15-a261-df6067c9c321'):
+    send_status('loading iris dataset...')
+    send_node_status({
+        'node_hash':node_hash,
+        'status':'active'
+    })
+    
+    # test portion
+    test_portion = float(props[node_hash][0]['data'])
+    
+    iris = load_iris()
+    X = iris.data[:, :2]  # Use only the first two features for 2D plotting
+    y = iris.target
+        
+    # Split the dataset into training and testing sets
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=test_portion, random_state=42)
+    
+    # ****************** this is a standards ******************
+    setTransfer(target_hash, [X, y, X_train, X_test, y_train, y_test, ['sepal width (cm)', 'sepal length (cm)']])
+    send_status('done loading iris.')
+    send_node_status({
+        'node_hash':node_hash,
+        'status':'done'
+    })
+    
+
+
+import numpy as np
+from sklearn.neighbors import KNeighborsClassifier
+
+def knn(node_hash:str='636eaab7-4f71-4d15-a261-df6067c9c321', source_hash:str='636eaab7-4f71-4d15-a261-df6067c9c321', target_hash:str='d208220c-6ed8-4612-8346-d8ffbcd83aac'):
+    send_node_status({
+        'node_hash':node_hash,
+        'status':'active'
+    })
+    send_status('training dataset with K-NN...')
+    X, y, X_train, X_test, y_train, y_test, labels = getTransfer(source_hash)
+    
+    # number of neighbors 
+    k = int(props[node_hash][0]['data'])
+
+    # Train the KNN model
+    knn = KNeighborsClassifier(n_neighbors=k)
+    knn.fit(X_train, y_train)
+
+    # create decision boundaries
+    x_min, x_max = X[:, 0].min() - 1, X[:, 0].max() + 1
+    y_min, y_max = X[:, 1].min() - 1, X[:, 1].max() + 1
+    xx, yy = np.meshgrid(np.arange(x_min, x_max, 0.01),
+                        np.arange(y_min, y_max, 0.01))
+    Z = knn.predict(np.c_[xx.ravel(), yy.ravel()])
+    Z = Z.reshape(xx.shape)
+    
+    send_status('done training.')
+    setTransfer(target_hash, [xx, yy, Z, labels])
+    send_node_status({
+        'node_hash':node_hash,
+        'status':'done'
+    })
+    
+
+
+import matplotlib.pyplot as plt
+import base64
+from io import BytesIO
+
+
+def decision_boundary(node_hash:str='d208220c-6ed8-4612-8346-d8ffbcd83aac', source_hash:str='d208220c-6ed8-4612-8346-d8ffbcd83aac', target_hash:str=''):
+    send_node_status({
+        'node_hash':node_hash,
+        'status':'active'
+    })
+    send_status('generating plot on given model')
+    xx, yy, Z, labels = getTransfer(source_hash)
+    
+    plt.contourf(xx, yy, Z, alpha=0.3)
+    plt.title('Decision Boundary')
+    # TODO: pass feature names in props
+    # plt.xlabel(iris.feature_names[0])
+    # plt.ylabel(iris.feature_names[1])
+    if (labels):
+        plt.xlabel(labels[0])
+        plt.ylabel(labels[1])
+    else:
+        plt.xlabel('x_label')
+        plt.ylabel('y_label')
+    plt.legend()
+
+    # Transfer to base64 image
+    buf = BytesIO()
+    plt.savefig(buf, format='png')
+    buf.seek(0)
+    img_str = base64.b64encode(buf.read()).decode('utf-8')
+    buf.close()
+
+    send_status('done generating plot.')
+    send_node_status({
+        'node_hash':node_hash,
+        'status':'done'
+    })
+    send_popup(data={'data':img_str, 'title':'Decision Boundary', 'type':'base64'})
+
+
+
+
+iris()
+knn()
+decision_boundary()
