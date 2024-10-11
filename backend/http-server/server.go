@@ -12,7 +12,7 @@ import (
 	"github.com/labstack/echo/v4/middleware"
 )
 
-const INTERPRETER_ADDR = "http://localhost:4000/interpret"
+const INTERPRETER_ADDR = "http://interpreter:4000/interpret"
 
 // client data structure
 type Client struct {

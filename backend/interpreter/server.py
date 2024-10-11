@@ -3,8 +3,8 @@ import requests
 from core import core
 from flask import Flask, jsonify, request
 
-FEEDBACK_SERVER = 'http://localhost:8080/feedback'
-ML_ENGINE_SERVICE = 'http://localhost:5000/exec'
+FEEDBACK_SERVER = 'http://http-server:8080/feedback'
+ML_ENGINE_SERVICE = 'http://ml-engine:5000/exec'
 
 def feedback(json_data={}):
     try:

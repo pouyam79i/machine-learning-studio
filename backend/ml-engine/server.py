@@ -3,7 +3,7 @@ import requests
 from core import core
 from flask import Flask, jsonify, request
 
-FEEDBACK_SERVER = 'http://localhost:8080/feedback'
+FEEDBACK_SERVER = 'http://http-server:8080/feedback'
 
 app = Flask(__name__)
 
