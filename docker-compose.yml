@@ -13,14 +13,14 @@ services:
   interpreter:
     image: interpreter
     ports:
-      - "5000:5000"  
+      - "4000:4000"  
     networks:
       - app-network
 
   ml-engine:
     image: ml-engine
     ports:
-      - "4000:4000"  
+      - "5000:5000"  
     networks:
       - app-network
 

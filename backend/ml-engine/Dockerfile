@@ -10,8 +10,8 @@ COPY . .
 # Upgrade pip and install Python dependencies
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Expose port 4000 for the Flask application
-EXPOSE 4000
+# Expose port 5000 for the Flask application
+EXPOSE 5000
 
 # Define the command to run the Flask application using Gunicorn
 CMD ["python", "server.py"]
