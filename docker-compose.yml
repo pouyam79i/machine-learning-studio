@@ -1,0 +1,28 @@
+version: '3.8'
+services:
+  http-server:
+    image: http-server
+    ports:
+      - "8080:8080" 
+    networks:
+      - app-network
+    depends_on:
+      - interpreter
+      - ml-engine
+
+  interpreter:
+    image: interpreter
+    ports:
+      - "5000:5000"  
+    networks:
+      - app-network
+
+  ml-engine:
+    image: ml-engine
+    ports:
+      - "4000:4000"  
+    networks:
+      - app-network
+
+networks:
+  app-network:
