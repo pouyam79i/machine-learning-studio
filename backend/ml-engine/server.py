@@ -1,9 +1,10 @@
 import threading, json
 import requests
+import os
 from core import core
 from flask import Flask, jsonify, request
 
-FEEDBACK_SERVER = 'http://http-server:8080/feedback'
+FEEDBACK_SERVER = os.getenv('HTTP_SERVER_FEEDBACK', 'http://localhost:8080/feedback')
 
 app = Flask(__name__)
 
@@ -51,4 +52,4 @@ def execute():
     return jsonify({'message': 'code received successfully'})
 
 if __name__ == '__main__':
-    app.run(host='localhost', port='5000', debug=True)
+    app.run(port='5000', debug=True)

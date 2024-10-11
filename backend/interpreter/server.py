@@ -1,10 +1,11 @@
 import threading, json
+import os
 import requests
 from core import core
 from flask import Flask, jsonify, request
 
-FEEDBACK_SERVER = 'http://http-server:8080/feedback'
-ML_ENGINE_SERVICE = 'http://ml-engine:5000/exec'
+FEEDBACK_SERVER = os.getenv('HTTP_SERVER_FEEDBACK', 'http://localhost:8080/feedback')
+ML_ENGINE_SERVICE = os.getenv('ML_ENGINE_EXEC', 'http://localhost:5000/exec')
 
 def feedback(json_data={}):
     try:
@@ -70,4 +71,4 @@ def interpret():
     return jsonify({'message': 'successfully uploaded'})
 
 if __name__ == '__main__':
-    app.run(host='localhost', port='4000', debug=True)
+    app.run(port='4000', debug=True)

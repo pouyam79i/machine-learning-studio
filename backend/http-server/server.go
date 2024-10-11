@@ -5,14 +5,13 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
+	"os"
 
 	"github.com/google/uuid"
 	"github.com/gorilla/websocket"
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
 )
-
-const INTERPRETER_ADDR = "http://interpreter:4000/interpret"
 
 // client data structure
 type Client struct {
@@ -59,6 +58,14 @@ var upgrader = websocket.Upgrader{
 
 // save connections in a map
 var ConnectedUsers map[string]Client
+
+func getEnv(key, defaultValue string) string {
+	value, exists := os.LookupEnv(key)
+	if !exists {
+		return defaultValue
+	}
+	return value
+}
 
 func main() {
 
@@ -151,7 +158,8 @@ func callInterpreter(conn *websocket.Conn, userData string, userHash string) {
 	}
 
 	// create req for interpreter
-	req, err := http.NewRequest(http.MethodPost, INTERPRETER_ADDR, bytes.NewBuffer(jsonData))
+	interpreter_api := getEnv("INTERPRETER_SERVICE", "http://localhost:4000/interpret")
+	req, err := http.NewRequest(http.MethodPost, interpreter_api, bytes.NewBuffer(jsonData))
 	if err != nil {
 		res := &Res{
 			Status: 503,
