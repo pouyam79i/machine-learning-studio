@@ -7,6 +7,9 @@ from flask import Flask, jsonify, request
 FEEDBACK_SERVER = os.getenv('HTTP_SERVER_FEEDBACK', 'http://localhost:8080/feedback')
 ML_ENGINE_SERVICE = os.getenv('ML_ENGINE_EXEC', 'http://localhost:5000/exec')
 
+print(FEEDBACK_SERVER)
+print(ML_ENGINE_SERVICE)
+
 def feedback(json_data={}):
     try:
         r = requests.post(FEEDBACK_SERVER, json=json_data)

@@ -6,6 +6,8 @@ from flask import Flask, jsonify, request
 
 FEEDBACK_SERVER = os.getenv('HTTP_SERVER_FEEDBACK', 'http://localhost:8080/feedback')
 
+print(FEEDBACK_SERVER)
+
 app = Flask(__name__)
 
 def feedback(json_data={}):

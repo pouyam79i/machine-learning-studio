@@ -4,6 +4,12 @@ FROM golang:1.22
 # Set destination for COPY
 WORKDIR /app
 
+RUN apt-get update && \
+    apt-get install -y iputils-ping && \
+    apt-get install -y curl && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
+
 # Download Go modules
 COPY go.mod go.sum ./
 RUN go mod download

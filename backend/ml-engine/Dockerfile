@@ -1,6 +1,12 @@
 # Use the official Python 3.8 slim image as the base image
 FROM python:3.9-slim
 
+RUN apt-get update && \
+    apt-get install -y iputils-ping && \
+    apt-get install -y curl && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
+
 # Set the working directory within the container
 WORKDIR /app
 

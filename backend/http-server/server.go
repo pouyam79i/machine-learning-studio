@@ -159,6 +159,7 @@ func callInterpreter(conn *websocket.Conn, userData string, userHash string) {
 
 	// create req for interpreter
 	interpreter_api := getEnv("INTERPRETER_SERVICE", "http://localhost:4000/interpret")
+	fmt.Println(interpreter_api)
 	req, err := http.NewRequest(http.MethodPost, interpreter_api, bytes.NewBuffer(jsonData))
 	if err != nil {
 		res := &Res{
