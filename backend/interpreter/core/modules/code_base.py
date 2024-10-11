@@ -1,8 +1,9 @@
 # import general libs
 import json
 import requests
+import os
 
-FEEDBACK_SERVER = 'http://localhost:8080/feedback'
+FEEDBACK_SERVER = os.getenv('HTTP_SERVER_FEEDBACK', 'http://localhost:8080/feedback')
 DB_ADDR = './db/'
 
 # data transfer dict
