@@ -11,7 +11,9 @@ class core():
     def import_code(self, addr):
         addr = BASE_ADDR + addr + '.py'
         f = open(addr, "r")
-        return f.read()
+        data = f.read()
+        f.close()
+        return data
              
     # build a file
     def simple_build(self, input:dict):

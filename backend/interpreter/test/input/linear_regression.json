@@ -1,0 +1,39 @@
+{
+  "nodes": [
+    {
+      "id": "9e8b2493-df56-45c6-8f7a-30ab34a9f42c",
+      "props": [
+        { "tag": "db_name", "data": "" },
+        { "tag": "X", "data": "" },
+        { "tag": "y", "data": "" },
+        { "tag": "test_portion", "data": "0.2" }
+      ],
+      "status": "inactive",
+      "tag": "/import/csv"
+    },
+    {
+      "id": "04a83b8c-9274-4ae9-8255-464ccb03cc24",
+      "props": [],
+      "status": "inactive",
+      "tag": "/ml/linear_regression"
+    },
+    {
+      "id": "b54c93e5-a5f3-436a-b978-dfc016affa83",
+      "props": [],
+      "status": "inactive",
+      "tag": "/charts/line_graph"
+    }
+  ],
+  "edges": [
+    {
+      "id": "xy-edge__04a83b8c-9274-4ae9-8255-464ccb03cc24-9e8b2493-df56-45c6-8f7a-30ab34a9f42c",
+      "source": "04a83b8c-9274-4ae9-8255-464ccb03cc24",
+      "target": "9e8b2493-df56-45c6-8f7a-30ab34a9f42c"
+    },
+    {
+      "id": "xy-edge__b54c93e5-a5f3-436a-b978-dfc016affa83-04a83b8c-9274-4ae9-8255-464ccb03cc24",
+      "source": "b54c93e5-a5f3-436a-b978-dfc016affa83",
+      "target": "04a83b8c-9274-4ae9-8255-464ccb03cc24"
+    }
+  ]
+}

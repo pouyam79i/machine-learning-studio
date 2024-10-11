@@ -23,7 +23,7 @@ def feedback(json_data={}):
         print('feedback failed!')
 
 # displays a popup in ui
-def send_popup(data, user_hash='ca4e6999-23d9-4dc3-89d7-326c0aba61ca'):
+def send_popup(data, user_hash=''):
     feedback({
             'status':200,
             'user_hash': user_hash,
@@ -34,7 +34,7 @@ def send_popup(data, user_hash='ca4e6999-23d9-4dc3-89d7-326c0aba61ca'):
         })
 
 # updates user status in ui
-def send_status(data, user_hash='ca4e6999-23d9-4dc3-89d7-326c0aba61ca'):
+def send_status(data, user_hash=''):
     feedback({
             'status':200,
             'user_hash': user_hash,
@@ -45,7 +45,7 @@ def send_status(data, user_hash='ca4e6999-23d9-4dc3-89d7-326c0aba61ca'):
         })
     
 # updates a node status in ui
-def send_node_status(data, user_hash='ca4e6999-23d9-4dc3-89d7-326c0aba61ca'):
+def send_node_status(data, user_hash=''):
     feedback({
             'status':200,
             'user_hash': user_hash,
@@ -69,12 +69,12 @@ def getTransfer(hash):
 
 
 
-props = json.loads('{"0e3fd8a1-8aad-4036-8c52-a74006e24bba": [{"tag": "test_portion", "data": "0.2"}], "636eaab7-4f71-4d15-a261-df6067c9c321": [{"tag": "neighbors", "data": "3"}], "d208220c-6ed8-4612-8346-d8ffbcd83aac": []}')
+props = json.loads('{"d829f432-d1f0-4a70-90c2-7ccc98136f85": [{"tag": "test_portion", "data": "0.2"}], "54011a9c-7fe3-4f1e-8f60-4d41da97afa4": [{"tag": "neighbors", "data": "3"}], "e71d8437-fbee-426b-8af6-b3aec51cdaed": []}')
 import pandas as pd
 from sklearn.datasets import load_iris
 from sklearn.model_selection import train_test_split
 
-def iris(node_hash:str='0e3fd8a1-8aad-4036-8c52-a74006e24bba', source_hash:str='', target_hash:str='636eaab7-4f71-4d15-a261-df6067c9c321'):
+def iris(node_hash:str='d829f432-d1f0-4a70-90c2-7ccc98136f85', source_hash:str='', target_hash:str='54011a9c-7fe3-4f1e-8f60-4d41da97afa4'):
     send_status('loading iris dataset...')
     send_node_status({
         'node_hash':node_hash,
@@ -104,7 +104,7 @@ def iris(node_hash:str='0e3fd8a1-8aad-4036-8c52-a74006e24bba', source_hash:str='
 import numpy as np
 from sklearn.neighbors import KNeighborsClassifier
 
-def knn(node_hash:str='636eaab7-4f71-4d15-a261-df6067c9c321', source_hash:str='636eaab7-4f71-4d15-a261-df6067c9c321', target_hash:str='d208220c-6ed8-4612-8346-d8ffbcd83aac'):
+def knn(node_hash:str='54011a9c-7fe3-4f1e-8f60-4d41da97afa4', source_hash:str='54011a9c-7fe3-4f1e-8f60-4d41da97afa4', target_hash:str='e71d8437-fbee-426b-8af6-b3aec51cdaed'):
     send_node_status({
         'node_hash':node_hash,
         'status':'active'
@@ -141,7 +141,7 @@ import base64
 from io import BytesIO
 
 
-def decision_boundary(node_hash:str='d208220c-6ed8-4612-8346-d8ffbcd83aac', source_hash:str='d208220c-6ed8-4612-8346-d8ffbcd83aac', target_hash:str=''):
+def decision_boundary(node_hash:str='e71d8437-fbee-426b-8af6-b3aec51cdaed', source_hash:str='e71d8437-fbee-426b-8af6-b3aec51cdaed', target_hash:str=''):
     send_node_status({
         'node_hash':node_hash,
         'status':'active'
