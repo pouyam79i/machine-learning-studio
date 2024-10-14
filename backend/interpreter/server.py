@@ -49,8 +49,8 @@ def process(raw_data):
                 'data':'failed to send for execution!'
             }
         })
-        with open("./out/Output.py", "w") as text_file:
-            text_file.write(ready_code)
+        # with open("./out/Output.py", "w") as text_file:
+        #     text_file.write(ready_code)
         
     except:
         print("failed to interpret!")
