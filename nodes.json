@@ -1,0 +1,34 @@
+{
+  "nodes": [
+    {
+      "id": "000598a3-984c-43a3-aeac-047e1d280182",
+      "props": [{ "tag": "test_portion", "data": "0.2" }],
+      "status": "inactive",
+      "tag": "/import/existing_dataset/iris"
+    },
+    {
+      "id": "99d15e85-3da5-4f0e-8dee-7e0d3bcd71d1",
+      "props": [{ "tag": "neighbors", "data": "3" }],
+      "status": "inactive",
+      "tag": "/ml/knn"
+    },
+    {
+      "id": "53617d86-82de-4b28-a6a8-af0a6b6c5db6",
+      "props": [],
+      "status": "inactive",
+      "tag": "/charts/decision_boundary"
+    }
+  ],
+  "edges": [
+    {
+      "id": "xy-edge__99d15e85-3da5-4f0e-8dee-7e0d3bcd71d1-000598a3-984c-43a3-aeac-047e1d280182",
+      "source": "99d15e85-3da5-4f0e-8dee-7e0d3bcd71d1",
+      "target": "000598a3-984c-43a3-aeac-047e1d280182"
+    },
+    {
+      "id": "xy-edge__53617d86-82de-4b28-a6a8-af0a6b6c5db6-99d15e85-3da5-4f0e-8dee-7e0d3bcd71d1",
+      "source": "53617d86-82de-4b28-a6a8-af0a6b6c5db6",
+      "target": "99d15e85-3da5-4f0e-8dee-7e0d3bcd71d1"
+    }
+  ]
+}
